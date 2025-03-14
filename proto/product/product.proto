@@ -12,6 +12,9 @@ service ProductService {
   rpc GetCartProduct(GetProductRequest) returns (CartProduct) {}
 }
 
+
+
+
 message GetProductRequest {
     string product_id = 1;
 }
