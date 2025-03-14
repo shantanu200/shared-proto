@@ -9,6 +9,11 @@ import "google/protobuf/timestamp.proto";
 service ProductService {
   rpc GetProducts(GetProductsRequest) returns (GetProductsResponse) {}
   rpc GetCartProducts(GetProductsRequest) returns (GetCartProductResponse) {}
+  rpc GetCartProduct(GetProductRequest) returns (CartProduct) {}
+}
+
+message GetProductRequest {
+    string product_id = 1;
 }
 
 message GetProductsRequest {
