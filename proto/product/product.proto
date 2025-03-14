@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "github.com/shantanu200/shared-proto/gen/go/product";
+
+import "google/protobuf/timestamp.proto";
+
+service ProductService {
+  rpc GetProducts(GetProductsRequest) returns (GetProductsResponse) {}
+  rpc GetCartProducts(GetProductsRequest) returns (GetCartProductResponse) {}
+}
+
+message GetProductsRequest {
+  repeated string product_ids  = 1;
+}
+
+message GetProductsResponse {
+  repeated MasterProduct products = 1;
+  int32 total_count = 2;
+}
+
+message GetCartProductResponse {
+    repeated CartProduct products = 1;
+    int32 total_count = 2;
+}
+
+message CartProduct {
+  string K_id = 1;
+  string K_display_name = 2;
+  string K_description = 3;
+  string K_preview_image = 4;
+  int32 K_shelf_life_in_days = 5;
+  double K_display_price = 6;
+  int64 K_price_per_kg = 7;
+  double K_rating = 8;
+  int64 K_product_id = 9;
+  repeated string K_category = 10;
+  repeated string K_protions_gm = 11;
+  string K_veg_non_veg_type_id = 12;
+}
+
+message MasterProduct {
+  string K_id = 1;
+  int64 K_product_id = 2;
+  bool K_visibility = 3;
+  string K_display_name = 4;
+  string K_description = 5;
+  repeated string K_category = 6;
+  int64 K_shelf_life_in_days = 7;
+  string K_veg_non_veg_type_id = 8;
+  double K_display_price = 9;
+  double K_rate = 10;
+  double K_price_per_kg = 11;
+  string K_allergy_contents = 12;
+  repeated string K_protions_gm = 13;
+  int64 K_pieces_per_kg = 14;
+  string K_ingredients = 15;
+  double K_rating = 16;
+  int64 K_views = 17;
+  string K_tag = 18;
+  string K_preview_image = 19;
+  bool K_is_available = 20;
+  repeated string K_occasion = 21;
+  int64 RW_ProductId = 22;
+  string RW_DescForLabel = 23;
+  string RW_DisplayName = 24;
+  string RW_productname = 25;
+  google.protobuf.Timestamp created_at = 26;
+  google.protobuf.Timestamp updated_at = 27;
+  string deleted_by = 28;
+  google.protobuf.Timestamp deleted_at = 29;
+}
