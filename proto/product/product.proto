@@ -41,7 +41,7 @@ message CartProduct {
   double K_rating = 8;
   int64 K_product_id = 9;
   repeated string K_category = 10;
-  repeated string K_protions_gm = 11;
+  repeated string K_portions_gm = 11;
   string K_veg_non_veg_type_id = 12;
   double RW_GSTPer = 13;
 
@@ -60,7 +60,7 @@ message MasterProduct {
   double K_rate = 10;
   double K_price_per_kg = 11;
   string K_allergy_contents = 12;
-  repeated string K_protions_gm = 13;
+  repeated string K_portions_gm = 13;
   int64 K_pieces_per_kg = 14;
   string K_ingredients = 15;
   double K_rating = 16;
