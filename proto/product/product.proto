@@ -46,6 +46,8 @@ message CartProduct {
   repeated string K_category = 10;
   repeated string K_protions_gm = 11;
   string K_veg_non_veg_type_id = 12;
+  double RW_GSTPer = 13;
+
 }
 
 message MasterProduct {
