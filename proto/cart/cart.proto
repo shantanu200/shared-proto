@@ -14,6 +14,7 @@ message OrderCart {
   bool is_servicable = 5;
   bool is_fulfilled = 6;
   double total_cart_price = 7;
+
 }
 
 message OrderCartReq {
