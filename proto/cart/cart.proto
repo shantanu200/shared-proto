@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package cart;
+
+option go_package = "github.com/shantanu200/shared-proto/gen/go/cart";
+
+import "google/protobuf/timestamp.proto";
+
+message OrderCart {
+  string id = 1;
+  string user_id = 2;
+  string address_id = 3;
+  int64 store_id = 4;
+  bool is_servicable = 5;
+  bool is_fulfilled = 6;
+  bool total_cart_price = 7;
+}
+
+message OrderCartReq {
+  string cart_id = 1;
+}
+
+service CartService {
+  rpc GetOrderCart(OrderCartReq) returns (OrderCart);
+}

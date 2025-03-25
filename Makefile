@@ -16,5 +16,13 @@ generate_user:
 		--go-grpc_out=gen/go --go-grpc_opt=paths=source_relative \
 		user/user.proto
 
+generate_cart:
+	mkdir -p gen/go/cart
+	protoc --proto_path=proto \
+		--proto_path=./third_party \
+		--go_out=gen/go --go_opt=paths=source_relative \
+		--go-grpc_out=gen/go --go-grpc_opt=paths=source_relative \
+		cart/cart.proto
+
 clean:
 	rm -rf gen/go/*
