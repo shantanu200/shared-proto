@@ -26,13 +26,13 @@ type OrderCart struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId         string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	AddressId      string `protobuf:"bytes,3,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	StoreId        int64  `protobuf:"varint,4,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	IsServicable   bool   `protobuf:"varint,5,opt,name=is_servicable,json=isServicable,proto3" json:"is_servicable,omitempty"`
-	IsFulfilled    bool   `protobuf:"varint,6,opt,name=is_fulfilled,json=isFulfilled,proto3" json:"is_fulfilled,omitempty"`
-	TotalCartPrice bool   `protobuf:"varint,7,opt,name=total_cart_price,json=totalCartPrice,proto3" json:"total_cart_price,omitempty"`
+	Id             string  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId         string  `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	AddressId      string  `protobuf:"bytes,3,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
+	StoreId        int64   `protobuf:"varint,4,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	IsServicable   bool    `protobuf:"varint,5,opt,name=is_servicable,json=isServicable,proto3" json:"is_servicable,omitempty"`
+	IsFulfilled    bool    `protobuf:"varint,6,opt,name=is_fulfilled,json=isFulfilled,proto3" json:"is_fulfilled,omitempty"`
+	TotalCartPrice float64 `protobuf:"fixed64,7,opt,name=total_cart_price,json=totalCartPrice,proto3" json:"total_cart_price,omitempty"`
 }
 
 func (x *OrderCart) Reset() {
@@ -109,11 +109,11 @@ func (x *OrderCart) GetIsFulfilled() bool {
 	return false
 }
 
-func (x *OrderCart) GetTotalCartPrice() bool {
+func (x *OrderCart) GetTotalCartPrice() float64 {
 	if x != nil {
 		return x.TotalCartPrice
 	}
-	return false
+	return 0
 }
 
 type OrderCartReq struct {
@@ -182,7 +182,7 @@ var file_cart_cart_proto_rawDesc = []byte{
 	0x0a, 0x0c, 0x69, 0x73, 0x5f, 0x66, 0x75, 0x6c, 0x66, 0x69, 0x6c, 0x6c, 0x65, 0x64, 0x18, 0x06,
 	0x20, 0x01, 0x28, 0x08, 0x52, 0x0b, 0x69, 0x73, 0x46, 0x75, 0x6c, 0x66, 0x69, 0x6c, 0x6c, 0x65,
 	0x64, 0x12, 0x28, 0x0a, 0x10, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x63, 0x61, 0x72, 0x74, 0x5f,
-	0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0e, 0x74, 0x6f, 0x74,
+	0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0e, 0x74, 0x6f, 0x74,
 	0x61, 0x6c, 0x43, 0x61, 0x72, 0x74, 0x50, 0x72, 0x69, 0x63, 0x65, 0x22, 0x27, 0x0a, 0x0c, 0x4f,
 	0x72, 0x64, 0x65, 0x72, 0x43, 0x61, 0x72, 0x74, 0x52, 0x65, 0x71, 0x12, 0x17, 0x0a, 0x07, 0x63,
 	0x61, 0x72, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x63, 0x61,

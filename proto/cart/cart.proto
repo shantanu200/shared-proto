@@ -13,7 +13,7 @@ message OrderCart {
   int64 store_id = 4;
   bool is_servicable = 5;
   bool is_fulfilled = 6;
-  bool total_cart_price = 7;
+  double total_cart_price = 7;
 }
 
 message OrderCartReq {
