@@ -18,7 +18,6 @@ message OrderCart {
 
 message OrderCartReq {
   string cart_id = 1;
-
 }
 
 service CartService {
