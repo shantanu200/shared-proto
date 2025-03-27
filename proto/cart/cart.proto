@@ -6,6 +6,13 @@ option go_package = "github.com/shantanu200/shared-proto/gen/go/cart";
 
 import "google/protobuf/timestamp.proto";
 
+message OrderProduct {
+  string product_id = 1;
+  int64 quantity = 2;
+  double price = 3;
+  int64 portion = 4;
+}
+
 message OrderCart {
   string id = 1;
   string user_id = 2;
@@ -18,6 +25,7 @@ message OrderCart {
   double total_tax = 9;
   double discount_price = 10;
   double total_cart_price = 11;
+  repeated OrderProduct products = 12;
 }
 
 message OrderCartReq {
