@@ -27,6 +27,19 @@ message AddressReq {
   string address_id = 2;
 }
 
+message UserReq {
+  string user_id = 1;
+}
+
+message User {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string phone_number = 5;
+}
+
 service UserService {
   rpc GetUserAddressById(AddressReq) returns (UserAddress);
+  rpc GetUser(UserReq) returns (User);
 }
