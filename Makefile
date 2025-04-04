@@ -24,5 +24,13 @@ generate_cart:
 		--go-grpc_out=gen/go --go-grpc_opt=paths=source_relative \
 		cart/cart.proto
 
+generate_shop:
+	mkdir -p gen/go/shop
+	protoc --proto_path=proto \
+		--proto_path=./third_party \
+		--go_out=gen/go --go_opt=paths=source_relative \
+		--go-grpc_out=gen/go --go-grpc_opt=paths=source_relative \
+		shop/shop.proto
+
 clean:
 	rm -rf gen/go/*
