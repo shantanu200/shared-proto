@@ -44,37 +44,19 @@ message CartProduct {
   repeated string K_portions_gm = 11;
   string K_veg_non_veg_type_id = 12;
   double RW_GSTPer = 13;
-
 }
 
 message MasterProduct {
   string K_id = 1;
   int64 K_product_id = 2;
-  bool K_visibility = 3;
+  int64 K_visibility = 3;
   string K_display_name = 4;
-  string K_description = 5;
-  repeated string K_category = 6;
-  int64 K_shelf_life_in_days = 7;
-  string K_veg_non_veg_type_id = 8;
-  double K_display_price = 9;
-  double K_rate = 10;
-  double K_price_per_kg = 11;
-  string K_allergy_contents = 12;
-  repeated string K_portions_gm = 13;
-  int64 K_pieces_per_kg = 14;
-  string K_ingredients = 15;
-  double K_rating = 16;
-  int64 K_views = 17;
-  string K_tag = 18;
-  string K_preview_image = 19;
-  bool K_is_available = 20;
-  repeated string K_occasion = 21;
-  int64 RW_ProductId = 22;
-  string RW_DescForLabel = 23;
-  string RW_DisplayName = 24;
-  string RW_productname = 25;
-  google.protobuf.Timestamp created_at = 26;
-  google.protobuf.Timestamp updated_at = 27;
-  string deleted_by = 28;
-  google.protobuf.Timestamp deleted_at = 29;
+  string K_preview_image = 6;
+  int32 K_shelf_life_in_days = 7;
+  double K_display_price = 8;
+  int64 K_price_per_kg = 9;
+  double K_rating = 10;
+  repeated string K_category = 11;
+  repeated string K_portions_gm = 12;
+  string K_veg_non_veg_type_id = 13;
 }
