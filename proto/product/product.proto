@@ -10,6 +10,7 @@ service ProductService {
   rpc GetProducts(GetProductsRequest) returns (GetProductsResponse) {}
   rpc GetCartProducts(GetProductsRequest) returns (GetCartProductResponse) {}
   rpc GetCartProduct(GetProductRequest) returns (CartProduct) {}
+  rpc GetProductMap(GetProductsRequest) returns (ProductsMap) {}
 }
 
 message GetProductRequest {
@@ -59,4 +60,9 @@ message MasterProduct {
   repeated string K_category = 11;
   repeated string K_portions_gm = 12;
   string K_veg_non_veg_type_id = 13;
+}
+
+message ProductsMap {
+  map<string, MasterProduct> products = 1;
+  int64 total_count = 2;
 }

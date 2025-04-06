@@ -25,6 +25,7 @@ type ProductServiceClient interface {
 	GetProducts(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*GetProductsResponse, error)
 	GetCartProducts(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*GetCartProductResponse, error)
 	GetCartProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*CartProduct, error)
+	GetProductMap(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*ProductsMap, error)
 }
 
 type productServiceClient struct {
@@ -62,6 +63,15 @@ func (c *productServiceClient) GetCartProduct(ctx context.Context, in *GetProduc
 	return out, nil
 }
 
+func (c *productServiceClient) GetProductMap(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*ProductsMap, error) {
+	out := new(ProductsMap)
+	err := c.cc.Invoke(ctx, "/product.ProductService/GetProductMap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductServiceServer is the server API for ProductService service.
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility
@@ -69,6 +79,7 @@ type ProductServiceServer interface {
 	GetProducts(context.Context, *GetProductsRequest) (*GetProductsResponse, error)
 	GetCartProducts(context.Context, *GetProductsRequest) (*GetCartProductResponse, error)
 	GetCartProduct(context.Context, *GetProductRequest) (*CartProduct, error)
+	GetProductMap(context.Context, *GetProductsRequest) (*ProductsMap, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -84,6 +95,9 @@ func (UnimplementedProductServiceServer) GetCartProducts(context.Context, *GetPr
 }
 func (UnimplementedProductServiceServer) GetCartProduct(context.Context, *GetProductRequest) (*CartProduct, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCartProduct not implemented")
+}
+func (UnimplementedProductServiceServer) GetProductMap(context.Context, *GetProductsRequest) (*ProductsMap, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductMap not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 
@@ -152,6 +166,24 @@ func _ProductService_GetCartProduct_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductService_GetProductMap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProductsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).GetProductMap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/product.ProductService/GetProductMap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).GetProductMap(ctx, req.(*GetProductsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -170,6 +202,10 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCartProduct",
 			Handler:    _ProductService_GetCartProduct_Handler,
+		},
+		{
+			MethodName: "GetProductMap",
+			Handler:    _ProductService_GetProductMap_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
