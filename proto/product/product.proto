@@ -50,7 +50,7 @@ message CartProduct {
 message MasterProduct {
   string K_id = 1;
   int64 K_product_id = 2;
-  int64 K_visibility = 3;
+  bool K_visibility = 3;
   string K_display_name = 4;
   string K_preview_image = 6;
   int32 K_shelf_life_in_days = 7;
