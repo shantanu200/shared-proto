@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CartServiceClient interface {
 	GetOrderCart(ctx context.Context, in *OrderCartReq, opts ...grpc.CallOption) (*OrderCart, error)
-	UpdateCartFulfil(ctx context.Context, in *OrderCartReq, opts ...grpc.CallOption) (*UpdateCartRes, error)
+	UpdateCartFulfil(ctx context.Context, in *UpdateCartFulfilReq, opts ...grpc.CallOption) (*UpdateCartFulfilRes, error)
 }
 
 type cartServiceClient struct {
@@ -43,8 +43,8 @@ func (c *cartServiceClient) GetOrderCart(ctx context.Context, in *OrderCartReq, 
 	return out, nil
 }
 
-func (c *cartServiceClient) UpdateCartFulfil(ctx context.Context, in *OrderCartReq, opts ...grpc.CallOption) (*UpdateCartRes, error) {
-	out := new(UpdateCartRes)
+func (c *cartServiceClient) UpdateCartFulfil(ctx context.Context, in *UpdateCartFulfilReq, opts ...grpc.CallOption) (*UpdateCartFulfilRes, error) {
+	out := new(UpdateCartFulfilRes)
 	err := c.cc.Invoke(ctx, "/cart.CartService/UpdateCartFulfil", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -57,7 +57,7 @@ func (c *cartServiceClient) UpdateCartFulfil(ctx context.Context, in *OrderCartR
 // for forward compatibility
 type CartServiceServer interface {
 	GetOrderCart(context.Context, *OrderCartReq) (*OrderCart, error)
-	UpdateCartFulfil(context.Context, *OrderCartReq) (*UpdateCartRes, error)
+	UpdateCartFulfil(context.Context, *UpdateCartFulfilReq) (*UpdateCartFulfilRes, error)
 	mustEmbedUnimplementedCartServiceServer()
 }
 
@@ -68,7 +68,7 @@ type UnimplementedCartServiceServer struct {
 func (UnimplementedCartServiceServer) GetOrderCart(context.Context, *OrderCartReq) (*OrderCart, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderCart not implemented")
 }
-func (UnimplementedCartServiceServer) UpdateCartFulfil(context.Context, *OrderCartReq) (*UpdateCartRes, error) {
+func (UnimplementedCartServiceServer) UpdateCartFulfil(context.Context, *UpdateCartFulfilReq) (*UpdateCartFulfilRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCartFulfil not implemented")
 }
 func (UnimplementedCartServiceServer) mustEmbedUnimplementedCartServiceServer() {}
@@ -103,7 +103,7 @@ func _CartService_GetOrderCart_Handler(srv interface{}, ctx context.Context, dec
 }
 
 func _CartService_UpdateCartFulfil_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderCartReq)
+	in := new(UpdateCartFulfilReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ func _CartService_UpdateCartFulfil_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/cart.CartService/UpdateCartFulfil",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CartServiceServer).UpdateCartFulfil(ctx, req.(*OrderCartReq))
+		return srv.(CartServiceServer).UpdateCartFulfil(ctx, req.(*UpdateCartFulfilReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
