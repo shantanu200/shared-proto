@@ -55,7 +55,7 @@ message MasterProduct {
   string K_preview_image = 6;
   int32 K_shelf_life_in_days = 7;
   double K_display_price = 8;
-  int64 K_price_per_kg = 9;
+  double K_price_per_kg = 9;
   double K_rating = 10;
   repeated string K_category = 11;
   repeated string K_portions_gm = 12;
