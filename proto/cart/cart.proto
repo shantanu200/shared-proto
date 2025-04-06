@@ -33,6 +33,12 @@ message OrderCartReq {
   string cart_id = 1;
 }
 
+message UpdateCartRes {
+  string cart_id = 1;
+  bool  is_fulfilled = 2;
+}
+
 service CartService {
-  rpc GetOrderCart(OrderCartReq) returns (OrderCart);
+  rpc GetOrderCart(OrderCartReq) returns (OrderCart) {};
+  rpc UpdateCartFulfil(OrderCartReq) returns (UpdateCartRes) {};
 }
