@@ -10,7 +10,7 @@ service ProductService {
   rpc GetProducts(GetProductsRequest) returns (GetProductsResponse) {}
   rpc GetCartProducts(GetProductsRequest) returns (GetCartProductResponse) {}
   rpc GetCartProduct(GetProductRequest) returns (CartProduct) {}
-  rpc GetProductMap(GetProductsRequest) returns (ProductsMap) {}
+  rpc GetProductsMap(GetProductsRequest) returns (ProductsMap) {}
 }
 
 message GetProductRequest {

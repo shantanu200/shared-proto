@@ -25,7 +25,7 @@ type ProductServiceClient interface {
 	GetProducts(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*GetProductsResponse, error)
 	GetCartProducts(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*GetCartProductResponse, error)
 	GetCartProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*CartProduct, error)
-	GetProductMap(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*ProductsMap, error)
+	GetProductsMap(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*ProductsMap, error)
 }
 
 type productServiceClient struct {
@@ -63,9 +63,9 @@ func (c *productServiceClient) GetCartProduct(ctx context.Context, in *GetProduc
 	return out, nil
 }
 
-func (c *productServiceClient) GetProductMap(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*ProductsMap, error) {
+func (c *productServiceClient) GetProductsMap(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*ProductsMap, error) {
 	out := new(ProductsMap)
-	err := c.cc.Invoke(ctx, "/product.ProductService/GetProductMap", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/product.ProductService/GetProductsMap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ type ProductServiceServer interface {
 	GetProducts(context.Context, *GetProductsRequest) (*GetProductsResponse, error)
 	GetCartProducts(context.Context, *GetProductsRequest) (*GetCartProductResponse, error)
 	GetCartProduct(context.Context, *GetProductRequest) (*CartProduct, error)
-	GetProductMap(context.Context, *GetProductsRequest) (*ProductsMap, error)
+	GetProductsMap(context.Context, *GetProductsRequest) (*ProductsMap, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -96,8 +96,8 @@ func (UnimplementedProductServiceServer) GetCartProducts(context.Context, *GetPr
 func (UnimplementedProductServiceServer) GetCartProduct(context.Context, *GetProductRequest) (*CartProduct, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCartProduct not implemented")
 }
-func (UnimplementedProductServiceServer) GetProductMap(context.Context, *GetProductsRequest) (*ProductsMap, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProductMap not implemented")
+func (UnimplementedProductServiceServer) GetProductsMap(context.Context, *GetProductsRequest) (*ProductsMap, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductsMap not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 
@@ -166,20 +166,20 @@ func _ProductService_GetCartProduct_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductService_GetProductMap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_GetProductsMap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetProductsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductServiceServer).GetProductMap(ctx, in)
+		return srv.(ProductServiceServer).GetProductsMap(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/product.ProductService/GetProductMap",
+		FullMethod: "/product.ProductService/GetProductsMap",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).GetProductMap(ctx, req.(*GetProductsRequest))
+		return srv.(ProductServiceServer).GetProductsMap(ctx, req.(*GetProductsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -204,8 +204,8 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProductService_GetCartProduct_Handler,
 		},
 		{
-			MethodName: "GetProductMap",
-			Handler:    _ProductService_GetProductMap_Handler,
+			MethodName: "GetProductsMap",
+			Handler:    _ProductService_GetProductsMap_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
