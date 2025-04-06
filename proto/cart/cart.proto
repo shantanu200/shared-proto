@@ -28,6 +28,7 @@ message OrderCart {
   double total_cart_price = 11;
   repeated OrderProduct products = 12;
   string type = 13;
+  string tax_type = 14;
 }
 
 message OrderCartReq {
