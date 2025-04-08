@@ -32,5 +32,17 @@ generate_shop:
 		--go-grpc_out=gen/go --go-grpc_opt=paths=source_relative \
 		shop/shop.proto
 
+generate_order:
+	mkdir -p gen/go/order
+	protoc --proto_path=proto \
+		--proto_path=./third_party \
+		--go_out=gen/go --go_opt=paths=source_relative \
+		--go-grpc_out=gen/go --go-grpc_opt=paths=source_relative \
+		order/order.proto
+
+add: generate_product generate_user generate_cart generate_shop generate_order
+	@echo "Pushing Code to Repo"
+	git add gen
+
 clean:
 	rm -rf gen/go/*
