@@ -20,6 +20,8 @@ message UserAddress {
   double longitude = 11;
   string address_label = 12;
   string phone_number = 13;
+  int64 user_id = 14;
+  string id = 15;
 }
 
 message AddressReq {
