@@ -26,6 +26,8 @@ message Product {
   int64 portion = 3;
   double price = 4;
   double gst_per = 5;
+  string product_name = 6;
+  double price_per_kg = 7;
 }
 
 message OrderReq {
