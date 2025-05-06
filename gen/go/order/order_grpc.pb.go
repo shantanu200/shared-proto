@@ -29,6 +29,13 @@ type OrderServiceClient interface {
 	GetAvgRefundProcessingTime(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*AvgRefundProcessingTime, error)
 	GetRefundsByProduct(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundsByProduct, error)
 	GetRefundStores(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundStores, error)
+	GetTotalRevenue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*TotalRevenueResponse, error)
+	GetStoreRevenue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*StoreRevenueResponse, error)
+	GetCompletedOrderCount(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*CompletedOrderCountResponse, error)
+	GetOrderTypeRevenue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*OrderTypeRevenueResponse, error)
+	GetTaxBreakdown(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*TaxBreakdownResponse, error)
+	GetAverageOrderValue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*AverageOrderValueResponse, error)
+	GetSalesTrend(ctx context.Context, in *SalesTrendRequest, opts ...grpc.CallOption) (*SalesTrendResponse, error)
 }
 
 type orderServiceClient struct {
@@ -102,6 +109,69 @@ func (c *orderServiceClient) GetRefundStores(ctx context.Context, in *EmptyReq, 
 	return out, nil
 }
 
+func (c *orderServiceClient) GetTotalRevenue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*TotalRevenueResponse, error) {
+	out := new(TotalRevenueResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetTotalRevenue", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetStoreRevenue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*StoreRevenueResponse, error) {
+	out := new(StoreRevenueResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetStoreRevenue", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetCompletedOrderCount(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*CompletedOrderCountResponse, error) {
+	out := new(CompletedOrderCountResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetCompletedOrderCount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetOrderTypeRevenue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*OrderTypeRevenueResponse, error) {
+	out := new(OrderTypeRevenueResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetOrderTypeRevenue", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetTaxBreakdown(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*TaxBreakdownResponse, error) {
+	out := new(TaxBreakdownResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetTaxBreakdown", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetAverageOrderValue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*AverageOrderValueResponse, error) {
+	out := new(AverageOrderValueResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetAverageOrderValue", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetSalesTrend(ctx context.Context, in *SalesTrendRequest, opts ...grpc.CallOption) (*SalesTrendResponse, error) {
+	out := new(SalesTrendResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetSalesTrend", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -113,6 +183,13 @@ type OrderServiceServer interface {
 	GetAvgRefundProcessingTime(context.Context, *EmptyReq) (*AvgRefundProcessingTime, error)
 	GetRefundsByProduct(context.Context, *EmptyReq) (*RefundsByProduct, error)
 	GetRefundStores(context.Context, *EmptyReq) (*RefundStores, error)
+	GetTotalRevenue(context.Context, *DateRangeRequest) (*TotalRevenueResponse, error)
+	GetStoreRevenue(context.Context, *DateRangeRequest) (*StoreRevenueResponse, error)
+	GetCompletedOrderCount(context.Context, *DateRangeRequest) (*CompletedOrderCountResponse, error)
+	GetOrderTypeRevenue(context.Context, *DateRangeRequest) (*OrderTypeRevenueResponse, error)
+	GetTaxBreakdown(context.Context, *DateRangeRequest) (*TaxBreakdownResponse, error)
+	GetAverageOrderValue(context.Context, *DateRangeRequest) (*AverageOrderValueResponse, error)
+	GetSalesTrend(context.Context, *SalesTrendRequest) (*SalesTrendResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -140,6 +217,27 @@ func (UnimplementedOrderServiceServer) GetRefundsByProduct(context.Context, *Emp
 }
 func (UnimplementedOrderServiceServer) GetRefundStores(context.Context, *EmptyReq) (*RefundStores, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRefundStores not implemented")
+}
+func (UnimplementedOrderServiceServer) GetTotalRevenue(context.Context, *DateRangeRequest) (*TotalRevenueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTotalRevenue not implemented")
+}
+func (UnimplementedOrderServiceServer) GetStoreRevenue(context.Context, *DateRangeRequest) (*StoreRevenueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStoreRevenue not implemented")
+}
+func (UnimplementedOrderServiceServer) GetCompletedOrderCount(context.Context, *DateRangeRequest) (*CompletedOrderCountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCompletedOrderCount not implemented")
+}
+func (UnimplementedOrderServiceServer) GetOrderTypeRevenue(context.Context, *DateRangeRequest) (*OrderTypeRevenueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrderTypeRevenue not implemented")
+}
+func (UnimplementedOrderServiceServer) GetTaxBreakdown(context.Context, *DateRangeRequest) (*TaxBreakdownResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTaxBreakdown not implemented")
+}
+func (UnimplementedOrderServiceServer) GetAverageOrderValue(context.Context, *DateRangeRequest) (*AverageOrderValueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAverageOrderValue not implemented")
+}
+func (UnimplementedOrderServiceServer) GetSalesTrend(context.Context, *SalesTrendRequest) (*SalesTrendResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSalesTrend not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -280,6 +378,132 @@ func _OrderService_GetRefundStores_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_GetTotalRevenue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetTotalRevenue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetTotalRevenue",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetTotalRevenue(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetStoreRevenue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetStoreRevenue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetStoreRevenue",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetStoreRevenue(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetCompletedOrderCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetCompletedOrderCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetCompletedOrderCount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetCompletedOrderCount(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetOrderTypeRevenue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetOrderTypeRevenue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetOrderTypeRevenue",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetOrderTypeRevenue(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetTaxBreakdown_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetTaxBreakdown(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetTaxBreakdown",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetTaxBreakdown(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetAverageOrderValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetAverageOrderValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetAverageOrderValue",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetAverageOrderValue(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetSalesTrend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SalesTrendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetSalesTrend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetSalesTrend",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetSalesTrend(ctx, req.(*SalesTrendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -314,6 +538,34 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRefundStores",
 			Handler:    _OrderService_GetRefundStores_Handler,
+		},
+		{
+			MethodName: "GetTotalRevenue",
+			Handler:    _OrderService_GetTotalRevenue_Handler,
+		},
+		{
+			MethodName: "GetStoreRevenue",
+			Handler:    _OrderService_GetStoreRevenue_Handler,
+		},
+		{
+			MethodName: "GetCompletedOrderCount",
+			Handler:    _OrderService_GetCompletedOrderCount_Handler,
+		},
+		{
+			MethodName: "GetOrderTypeRevenue",
+			Handler:    _OrderService_GetOrderTypeRevenue_Handler,
+		},
+		{
+			MethodName: "GetTaxBreakdown",
+			Handler:    _OrderService_GetTaxBreakdown_Handler,
+		},
+		{
+			MethodName: "GetAverageOrderValue",
+			Handler:    _OrderService_GetAverageOrderValue_Handler,
+		},
+		{
+			MethodName: "GetSalesTrend",
+			Handler:    _OrderService_GetSalesTrend_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
