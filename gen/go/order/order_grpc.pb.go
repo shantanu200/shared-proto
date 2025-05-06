@@ -23,12 +23,12 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderServiceClient interface {
 	GetOrderByID(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*Order, error)
-	GetRefundTotalAmount(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundTotalAmount, error)
-	GetRefundRate(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundRate, error)
-	GetRefundSuccessRate(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundSuccessRate, error)
-	GetAvgRefundProcessingTime(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*AvgRefundProcessingTime, error)
-	GetRefundsByProduct(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundsByProduct, error)
-	GetRefundStores(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundStores, error)
+	GetRefundTotalAmount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundTotalAmount, error)
+	GetRefundRate(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundRate, error)
+	GetRefundSuccessRate(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundSuccessRate, error)
+	GetAvgRefundProcessingTime(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*AvgRefundProcessingTime, error)
+	GetRefundsByProduct(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundsByProduct, error)
+	GetRefundStores(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundStores, error)
 }
 
 type orderServiceClient struct {
@@ -48,7 +48,7 @@ func (c *orderServiceClient) GetOrderByID(ctx context.Context, in *OrderReq, opt
 	return out, nil
 }
 
-func (c *orderServiceClient) GetRefundTotalAmount(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundTotalAmount, error) {
+func (c *orderServiceClient) GetRefundTotalAmount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundTotalAmount, error) {
 	out := new(RefundTotalAmount)
 	err := c.cc.Invoke(ctx, "/order.OrderService/GetRefundTotalAmount", in, out, opts...)
 	if err != nil {
@@ -57,7 +57,7 @@ func (c *orderServiceClient) GetRefundTotalAmount(ctx context.Context, in *Order
 	return out, nil
 }
 
-func (c *orderServiceClient) GetRefundRate(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundRate, error) {
+func (c *orderServiceClient) GetRefundRate(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundRate, error) {
 	out := new(RefundRate)
 	err := c.cc.Invoke(ctx, "/order.OrderService/GetRefundRate", in, out, opts...)
 	if err != nil {
@@ -66,7 +66,7 @@ func (c *orderServiceClient) GetRefundRate(ctx context.Context, in *OrderReq, op
 	return out, nil
 }
 
-func (c *orderServiceClient) GetRefundSuccessRate(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundSuccessRate, error) {
+func (c *orderServiceClient) GetRefundSuccessRate(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundSuccessRate, error) {
 	out := new(RefundSuccessRate)
 	err := c.cc.Invoke(ctx, "/order.OrderService/GetRefundSuccessRate", in, out, opts...)
 	if err != nil {
@@ -75,7 +75,7 @@ func (c *orderServiceClient) GetRefundSuccessRate(ctx context.Context, in *Order
 	return out, nil
 }
 
-func (c *orderServiceClient) GetAvgRefundProcessingTime(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*AvgRefundProcessingTime, error) {
+func (c *orderServiceClient) GetAvgRefundProcessingTime(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*AvgRefundProcessingTime, error) {
 	out := new(AvgRefundProcessingTime)
 	err := c.cc.Invoke(ctx, "/order.OrderService/GetAvgRefundProcessingTime", in, out, opts...)
 	if err != nil {
@@ -84,7 +84,7 @@ func (c *orderServiceClient) GetAvgRefundProcessingTime(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *orderServiceClient) GetRefundsByProduct(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundsByProduct, error) {
+func (c *orderServiceClient) GetRefundsByProduct(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundsByProduct, error) {
 	out := new(RefundsByProduct)
 	err := c.cc.Invoke(ctx, "/order.OrderService/GetRefundsByProduct", in, out, opts...)
 	if err != nil {
@@ -93,7 +93,7 @@ func (c *orderServiceClient) GetRefundsByProduct(ctx context.Context, in *OrderR
 	return out, nil
 }
 
-func (c *orderServiceClient) GetRefundStores(ctx context.Context, in *OrderReq, opts ...grpc.CallOption) (*RefundStores, error) {
+func (c *orderServiceClient) GetRefundStores(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RefundStores, error) {
 	out := new(RefundStores)
 	err := c.cc.Invoke(ctx, "/order.OrderService/GetRefundStores", in, out, opts...)
 	if err != nil {
@@ -107,12 +107,12 @@ func (c *orderServiceClient) GetRefundStores(ctx context.Context, in *OrderReq, 
 // for forward compatibility
 type OrderServiceServer interface {
 	GetOrderByID(context.Context, *OrderReq) (*Order, error)
-	GetRefundTotalAmount(context.Context, *OrderReq) (*RefundTotalAmount, error)
-	GetRefundRate(context.Context, *OrderReq) (*RefundRate, error)
-	GetRefundSuccessRate(context.Context, *OrderReq) (*RefundSuccessRate, error)
-	GetAvgRefundProcessingTime(context.Context, *OrderReq) (*AvgRefundProcessingTime, error)
-	GetRefundsByProduct(context.Context, *OrderReq) (*RefundsByProduct, error)
-	GetRefundStores(context.Context, *OrderReq) (*RefundStores, error)
+	GetRefundTotalAmount(context.Context, *EmptyReq) (*RefundTotalAmount, error)
+	GetRefundRate(context.Context, *EmptyReq) (*RefundRate, error)
+	GetRefundSuccessRate(context.Context, *EmptyReq) (*RefundSuccessRate, error)
+	GetAvgRefundProcessingTime(context.Context, *EmptyReq) (*AvgRefundProcessingTime, error)
+	GetRefundsByProduct(context.Context, *EmptyReq) (*RefundsByProduct, error)
+	GetRefundStores(context.Context, *EmptyReq) (*RefundStores, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -123,22 +123,22 @@ type UnimplementedOrderServiceServer struct {
 func (UnimplementedOrderServiceServer) GetOrderByID(context.Context, *OrderReq) (*Order, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderByID not implemented")
 }
-func (UnimplementedOrderServiceServer) GetRefundTotalAmount(context.Context, *OrderReq) (*RefundTotalAmount, error) {
+func (UnimplementedOrderServiceServer) GetRefundTotalAmount(context.Context, *EmptyReq) (*RefundTotalAmount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRefundTotalAmount not implemented")
 }
-func (UnimplementedOrderServiceServer) GetRefundRate(context.Context, *OrderReq) (*RefundRate, error) {
+func (UnimplementedOrderServiceServer) GetRefundRate(context.Context, *EmptyReq) (*RefundRate, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRefundRate not implemented")
 }
-func (UnimplementedOrderServiceServer) GetRefundSuccessRate(context.Context, *OrderReq) (*RefundSuccessRate, error) {
+func (UnimplementedOrderServiceServer) GetRefundSuccessRate(context.Context, *EmptyReq) (*RefundSuccessRate, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRefundSuccessRate not implemented")
 }
-func (UnimplementedOrderServiceServer) GetAvgRefundProcessingTime(context.Context, *OrderReq) (*AvgRefundProcessingTime, error) {
+func (UnimplementedOrderServiceServer) GetAvgRefundProcessingTime(context.Context, *EmptyReq) (*AvgRefundProcessingTime, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAvgRefundProcessingTime not implemented")
 }
-func (UnimplementedOrderServiceServer) GetRefundsByProduct(context.Context, *OrderReq) (*RefundsByProduct, error) {
+func (UnimplementedOrderServiceServer) GetRefundsByProduct(context.Context, *EmptyReq) (*RefundsByProduct, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRefundsByProduct not implemented")
 }
-func (UnimplementedOrderServiceServer) GetRefundStores(context.Context, *OrderReq) (*RefundStores, error) {
+func (UnimplementedOrderServiceServer) GetRefundStores(context.Context, *EmptyReq) (*RefundStores, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRefundStores not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
@@ -173,7 +173,7 @@ func _OrderService_GetOrderByID_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _OrderService_GetRefundTotalAmount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReq)
+	in := new(EmptyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -185,13 +185,13 @@ func _OrderService_GetRefundTotalAmount_Handler(srv interface{}, ctx context.Con
 		FullMethod: "/order.OrderService/GetRefundTotalAmount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).GetRefundTotalAmount(ctx, req.(*OrderReq))
+		return srv.(OrderServiceServer).GetRefundTotalAmount(ctx, req.(*EmptyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _OrderService_GetRefundRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReq)
+	in := new(EmptyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -203,13 +203,13 @@ func _OrderService_GetRefundRate_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/order.OrderService/GetRefundRate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).GetRefundRate(ctx, req.(*OrderReq))
+		return srv.(OrderServiceServer).GetRefundRate(ctx, req.(*EmptyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _OrderService_GetRefundSuccessRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReq)
+	in := new(EmptyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -221,13 +221,13 @@ func _OrderService_GetRefundSuccessRate_Handler(srv interface{}, ctx context.Con
 		FullMethod: "/order.OrderService/GetRefundSuccessRate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).GetRefundSuccessRate(ctx, req.(*OrderReq))
+		return srv.(OrderServiceServer).GetRefundSuccessRate(ctx, req.(*EmptyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _OrderService_GetAvgRefundProcessingTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReq)
+	in := new(EmptyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -239,13 +239,13 @@ func _OrderService_GetAvgRefundProcessingTime_Handler(srv interface{}, ctx conte
 		FullMethod: "/order.OrderService/GetAvgRefundProcessingTime",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).GetAvgRefundProcessingTime(ctx, req.(*OrderReq))
+		return srv.(OrderServiceServer).GetAvgRefundProcessingTime(ctx, req.(*EmptyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _OrderService_GetRefundsByProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReq)
+	in := new(EmptyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -257,13 +257,13 @@ func _OrderService_GetRefundsByProduct_Handler(srv interface{}, ctx context.Cont
 		FullMethod: "/order.OrderService/GetRefundsByProduct",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).GetRefundsByProduct(ctx, req.(*OrderReq))
+		return srv.(OrderServiceServer).GetRefundsByProduct(ctx, req.(*EmptyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _OrderService_GetRefundStores_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OrderReq)
+	in := new(EmptyReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -275,7 +275,7 @@ func _OrderService_GetRefundStores_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/order.OrderService/GetRefundStores",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).GetRefundStores(ctx, req.(*OrderReq))
+		return srv.(OrderServiceServer).GetRefundStores(ctx, req.(*EmptyReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
