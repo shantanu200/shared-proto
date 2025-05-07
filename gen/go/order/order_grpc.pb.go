@@ -36,6 +36,7 @@ type OrderServiceClient interface {
 	GetTaxBreakdown(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*TaxBreakdownResponse, error)
 	GetAverageOrderValue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*AverageOrderValueResponse, error)
 	GetSalesTrend(ctx context.Context, in *SalesTrendRequest, opts ...grpc.CallOption) (*SalesTrendResponse, error)
+	GetDiscountTotalAmount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*DiscountAmount, error)
 }
 
 type orderServiceClient struct {
@@ -172,6 +173,15 @@ func (c *orderServiceClient) GetSalesTrend(ctx context.Context, in *SalesTrendRe
 	return out, nil
 }
 
+func (c *orderServiceClient) GetDiscountTotalAmount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*DiscountAmount, error) {
+	out := new(DiscountAmount)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetDiscountTotalAmount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -190,6 +200,7 @@ type OrderServiceServer interface {
 	GetTaxBreakdown(context.Context, *DateRangeRequest) (*TaxBreakdownResponse, error)
 	GetAverageOrderValue(context.Context, *DateRangeRequest) (*AverageOrderValueResponse, error)
 	GetSalesTrend(context.Context, *SalesTrendRequest) (*SalesTrendResponse, error)
+	GetDiscountTotalAmount(context.Context, *EmptyReq) (*DiscountAmount, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -238,6 +249,9 @@ func (UnimplementedOrderServiceServer) GetAverageOrderValue(context.Context, *Da
 }
 func (UnimplementedOrderServiceServer) GetSalesTrend(context.Context, *SalesTrendRequest) (*SalesTrendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSalesTrend not implemented")
+}
+func (UnimplementedOrderServiceServer) GetDiscountTotalAmount(context.Context, *EmptyReq) (*DiscountAmount, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDiscountTotalAmount not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -504,6 +518,24 @@ func _OrderService_GetSalesTrend_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_GetDiscountTotalAmount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetDiscountTotalAmount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetDiscountTotalAmount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetDiscountTotalAmount(ctx, req.(*EmptyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -566,6 +598,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSalesTrend",
 			Handler:    _OrderService_GetSalesTrend_Handler,
+		},
+		{
+			MethodName: "GetDiscountTotalAmount",
+			Handler:    _OrderService_GetDiscountTotalAmount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
