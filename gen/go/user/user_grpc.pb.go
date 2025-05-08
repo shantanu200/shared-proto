@@ -24,6 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type UserServiceClient interface {
 	GetUserAddressById(ctx context.Context, in *AddressReq, opts ...grpc.CallOption) (*UserAddress, error)
 	GetUser(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*User, error)
+	UpdateOrderPlaced(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*EmptyReq, error)
 }
 
 type userServiceClient struct {
@@ -52,12 +53,22 @@ func (c *userServiceClient) GetUser(ctx context.Context, in *UserReq, opts ...gr
 	return out, nil
 }
 
+func (c *userServiceClient) UpdateOrderPlaced(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*EmptyReq, error) {
+	out := new(EmptyReq)
+	err := c.cc.Invoke(ctx, "/user.UserService/UpdateOrderPlaced", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
 	GetUserAddressById(context.Context, *AddressReq) (*UserAddress, error)
 	GetUser(context.Context, *UserReq) (*User, error)
+	UpdateOrderPlaced(context.Context, *UserReq) (*EmptyReq, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -70,6 +81,9 @@ func (UnimplementedUserServiceServer) GetUserAddressById(context.Context, *Addre
 }
 func (UnimplementedUserServiceServer) GetUser(context.Context, *UserReq) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateOrderPlaced(context.Context, *UserReq) (*EmptyReq, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderPlaced not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -120,6 +134,24 @@ func _UserService_GetUser_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdateOrderPlaced_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateOrderPlaced(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/user.UserService/UpdateOrderPlaced",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateOrderPlaced(ctx, req.(*UserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +166,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _UserService_GetUser_Handler,
+		},
+		{
+			MethodName: "UpdateOrderPlaced",
+			Handler:    _UserService_UpdateOrderPlaced_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
