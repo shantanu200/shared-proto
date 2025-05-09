@@ -25,7 +25,7 @@ type UserServiceClient interface {
 	GetUserAddressById(ctx context.Context, in *AddressReq, opts ...grpc.CallOption) (*UserAddress, error)
 	GetUser(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*User, error)
 	UpdateOrderPlaced(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*EmptyReq, error)
-	GetUserTotalCount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*UserTotalCount, error)
+	GetUserTotalCount(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*UserTotalCount, error)
 }
 
 type userServiceClient struct {
@@ -63,7 +63,7 @@ func (c *userServiceClient) UpdateOrderPlaced(ctx context.Context, in *UserReq, 
 	return out, nil
 }
 
-func (c *userServiceClient) GetUserTotalCount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*UserTotalCount, error) {
+func (c *userServiceClient) GetUserTotalCount(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*UserTotalCount, error) {
 	out := new(UserTotalCount)
 	err := c.cc.Invoke(ctx, "/user.UserService/GetUserTotalCount", in, out, opts...)
 	if err != nil {
@@ -79,7 +79,7 @@ type UserServiceServer interface {
 	GetUserAddressById(context.Context, *AddressReq) (*UserAddress, error)
 	GetUser(context.Context, *UserReq) (*User, error)
 	UpdateOrderPlaced(context.Context, *UserReq) (*EmptyReq, error)
-	GetUserTotalCount(context.Context, *EmptyReq) (*UserTotalCount, error)
+	GetUserTotalCount(context.Context, *DateRangeRequest) (*UserTotalCount, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -96,7 +96,7 @@ func (UnimplementedUserServiceServer) GetUser(context.Context, *UserReq) (*User,
 func (UnimplementedUserServiceServer) UpdateOrderPlaced(context.Context, *UserReq) (*EmptyReq, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderPlaced not implemented")
 }
-func (UnimplementedUserServiceServer) GetUserTotalCount(context.Context, *EmptyReq) (*UserTotalCount, error) {
+func (UnimplementedUserServiceServer) GetUserTotalCount(context.Context, *DateRangeRequest) (*UserTotalCount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserTotalCount not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
@@ -167,7 +167,7 @@ func _UserService_UpdateOrderPlaced_Handler(srv interface{}, ctx context.Context
 }
 
 func _UserService_GetUserTotalCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmptyReq)
+	in := new(DateRangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -179,7 +179,7 @@ func _UserService_GetUserTotalCount_Handler(srv interface{}, ctx context.Context
 		FullMethod: "/user.UserService/GetUserTotalCount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetUserTotalCount(ctx, req.(*EmptyReq))
+		return srv.(UserServiceServer).GetUserTotalCount(ctx, req.(*DateRangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
