@@ -26,6 +26,7 @@ type UserServiceClient interface {
 	GetUser(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*User, error)
 	UpdateOrderPlaced(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*EmptyReq, error)
 	GetUserTotalCount(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*UserTotalCount, error)
+	GetActiveUserCount(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*ActiveUserTotalCount, error)
 }
 
 type userServiceClient struct {
@@ -72,6 +73,15 @@ func (c *userServiceClient) GetUserTotalCount(ctx context.Context, in *DateRange
 	return out, nil
 }
 
+func (c *userServiceClient) GetActiveUserCount(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*ActiveUserTotalCount, error) {
+	out := new(ActiveUserTotalCount)
+	err := c.cc.Invoke(ctx, "/user.UserService/GetActiveUserCount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -80,6 +90,7 @@ type UserServiceServer interface {
 	GetUser(context.Context, *UserReq) (*User, error)
 	UpdateOrderPlaced(context.Context, *UserReq) (*EmptyReq, error)
 	GetUserTotalCount(context.Context, *DateRangeRequest) (*UserTotalCount, error)
+	GetActiveUserCount(context.Context, *DateRangeRequest) (*ActiveUserTotalCount, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -98,6 +109,9 @@ func (UnimplementedUserServiceServer) UpdateOrderPlaced(context.Context, *UserRe
 }
 func (UnimplementedUserServiceServer) GetUserTotalCount(context.Context, *DateRangeRequest) (*UserTotalCount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserTotalCount not implemented")
+}
+func (UnimplementedUserServiceServer) GetActiveUserCount(context.Context, *DateRangeRequest) (*ActiveUserTotalCount, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetActiveUserCount not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -184,6 +198,24 @@ func _UserService_GetUserTotalCount_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_GetActiveUserCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetActiveUserCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/user.UserService/GetActiveUserCount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetActiveUserCount(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -206,6 +238,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserTotalCount",
 			Handler:    _UserService_GetUserTotalCount_Handler,
+		},
+		{
+			MethodName: "GetActiveUserCount",
+			Handler:    _UserService_GetActiveUserCount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
