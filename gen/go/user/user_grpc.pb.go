@@ -25,6 +25,7 @@ type UserServiceClient interface {
 	GetUserAddressById(ctx context.Context, in *AddressReq, opts ...grpc.CallOption) (*UserAddress, error)
 	GetUser(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*User, error)
 	UpdateOrderPlaced(ctx context.Context, in *UserReq, opts ...grpc.CallOption) (*EmptyReq, error)
+	GetUserTotalCount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*UserTotalCount, error)
 }
 
 type userServiceClient struct {
@@ -62,6 +63,15 @@ func (c *userServiceClient) UpdateOrderPlaced(ctx context.Context, in *UserReq, 
 	return out, nil
 }
 
+func (c *userServiceClient) GetUserTotalCount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*UserTotalCount, error) {
+	out := new(UserTotalCount)
+	err := c.cc.Invoke(ctx, "/user.UserService/GetUserTotalCount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -69,6 +79,7 @@ type UserServiceServer interface {
 	GetUserAddressById(context.Context, *AddressReq) (*UserAddress, error)
 	GetUser(context.Context, *UserReq) (*User, error)
 	UpdateOrderPlaced(context.Context, *UserReq) (*EmptyReq, error)
+	GetUserTotalCount(context.Context, *EmptyReq) (*UserTotalCount, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -84,6 +95,9 @@ func (UnimplementedUserServiceServer) GetUser(context.Context, *UserReq) (*User,
 }
 func (UnimplementedUserServiceServer) UpdateOrderPlaced(context.Context, *UserReq) (*EmptyReq, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderPlaced not implemented")
+}
+func (UnimplementedUserServiceServer) GetUserTotalCount(context.Context, *EmptyReq) (*UserTotalCount, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserTotalCount not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -152,6 +166,24 @@ func _UserService_UpdateOrderPlaced_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_GetUserTotalCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetUserTotalCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/user.UserService/GetUserTotalCount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetUserTotalCount(ctx, req.(*EmptyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -170,6 +202,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOrderPlaced",
 			Handler:    _UserService_UpdateOrderPlaced_Handler,
+		},
+		{
+			MethodName: "GetUserTotalCount",
+			Handler:    _UserService_GetUserTotalCount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
