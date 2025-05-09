@@ -37,6 +37,15 @@ type OrderServiceClient interface {
 	GetAverageOrderValue(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*AverageOrderValueResponse, error)
 	GetSalesTrend(ctx context.Context, in *SalesTrendRequest, opts ...grpc.CallOption) (*SalesTrendResponse, error)
 	GetDiscountTotalAmount(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*DiscountAmount, error)
+	GetOrderStatusDistribution(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*OrderStatusDistributionResponse, error)
+	GetAverageDeliveryTime(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*AverageDeliveryTimeResponse, error)
+	GetCartRate(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*CartRateResponse, error)
+	GetOrdersPerStore(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*OrdersPerStoreResponse, error)
+	GetAverageItemsPerOrder(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*AverageItemsPerOrderResponse, error)
+	GetPaymentStatusDistribution(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*PaymentStatusDistributionResponse, error)
+	GetDeliveryStatusDistribution(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*DeliveryStatusDistributionResponse, error)
+	GetOrdersByRegion(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*OrdersByRegionResponse, error)
+	GetPeakOrderTimes(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*PeakOrderTimesResponse, error)
 }
 
 type orderServiceClient struct {
@@ -182,6 +191,87 @@ func (c *orderServiceClient) GetDiscountTotalAmount(ctx context.Context, in *Emp
 	return out, nil
 }
 
+func (c *orderServiceClient) GetOrderStatusDistribution(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*OrderStatusDistributionResponse, error) {
+	out := new(OrderStatusDistributionResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetOrderStatusDistribution", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetAverageDeliveryTime(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*AverageDeliveryTimeResponse, error) {
+	out := new(AverageDeliveryTimeResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetAverageDeliveryTime", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetCartRate(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*CartRateResponse, error) {
+	out := new(CartRateResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetCartRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetOrdersPerStore(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*OrdersPerStoreResponse, error) {
+	out := new(OrdersPerStoreResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetOrdersPerStore", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetAverageItemsPerOrder(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*AverageItemsPerOrderResponse, error) {
+	out := new(AverageItemsPerOrderResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetAverageItemsPerOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetPaymentStatusDistribution(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*PaymentStatusDistributionResponse, error) {
+	out := new(PaymentStatusDistributionResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetPaymentStatusDistribution", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetDeliveryStatusDistribution(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*DeliveryStatusDistributionResponse, error) {
+	out := new(DeliveryStatusDistributionResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetDeliveryStatusDistribution", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetOrdersByRegion(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*OrdersByRegionResponse, error) {
+	out := new(OrdersByRegionResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetOrdersByRegion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) GetPeakOrderTimes(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*PeakOrderTimesResponse, error) {
+	out := new(PeakOrderTimesResponse)
+	err := c.cc.Invoke(ctx, "/order.OrderService/GetPeakOrderTimes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -201,6 +291,15 @@ type OrderServiceServer interface {
 	GetAverageOrderValue(context.Context, *DateRangeRequest) (*AverageOrderValueResponse, error)
 	GetSalesTrend(context.Context, *SalesTrendRequest) (*SalesTrendResponse, error)
 	GetDiscountTotalAmount(context.Context, *EmptyReq) (*DiscountAmount, error)
+	GetOrderStatusDistribution(context.Context, *DateRangeRequest) (*OrderStatusDistributionResponse, error)
+	GetAverageDeliveryTime(context.Context, *DateRangeRequest) (*AverageDeliveryTimeResponse, error)
+	GetCartRate(context.Context, *DateRangeRequest) (*CartRateResponse, error)
+	GetOrdersPerStore(context.Context, *DateRangeRequest) (*OrdersPerStoreResponse, error)
+	GetAverageItemsPerOrder(context.Context, *DateRangeRequest) (*AverageItemsPerOrderResponse, error)
+	GetPaymentStatusDistribution(context.Context, *DateRangeRequest) (*PaymentStatusDistributionResponse, error)
+	GetDeliveryStatusDistribution(context.Context, *DateRangeRequest) (*DeliveryStatusDistributionResponse, error)
+	GetOrdersByRegion(context.Context, *DateRangeRequest) (*OrdersByRegionResponse, error)
+	GetPeakOrderTimes(context.Context, *DateRangeRequest) (*PeakOrderTimesResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -252,6 +351,33 @@ func (UnimplementedOrderServiceServer) GetSalesTrend(context.Context, *SalesTren
 }
 func (UnimplementedOrderServiceServer) GetDiscountTotalAmount(context.Context, *EmptyReq) (*DiscountAmount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDiscountTotalAmount not implemented")
+}
+func (UnimplementedOrderServiceServer) GetOrderStatusDistribution(context.Context, *DateRangeRequest) (*OrderStatusDistributionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrderStatusDistribution not implemented")
+}
+func (UnimplementedOrderServiceServer) GetAverageDeliveryTime(context.Context, *DateRangeRequest) (*AverageDeliveryTimeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAverageDeliveryTime not implemented")
+}
+func (UnimplementedOrderServiceServer) GetCartRate(context.Context, *DateRangeRequest) (*CartRateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCartRate not implemented")
+}
+func (UnimplementedOrderServiceServer) GetOrdersPerStore(context.Context, *DateRangeRequest) (*OrdersPerStoreResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrdersPerStore not implemented")
+}
+func (UnimplementedOrderServiceServer) GetAverageItemsPerOrder(context.Context, *DateRangeRequest) (*AverageItemsPerOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAverageItemsPerOrder not implemented")
+}
+func (UnimplementedOrderServiceServer) GetPaymentStatusDistribution(context.Context, *DateRangeRequest) (*PaymentStatusDistributionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentStatusDistribution not implemented")
+}
+func (UnimplementedOrderServiceServer) GetDeliveryStatusDistribution(context.Context, *DateRangeRequest) (*DeliveryStatusDistributionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDeliveryStatusDistribution not implemented")
+}
+func (UnimplementedOrderServiceServer) GetOrdersByRegion(context.Context, *DateRangeRequest) (*OrdersByRegionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrdersByRegion not implemented")
+}
+func (UnimplementedOrderServiceServer) GetPeakOrderTimes(context.Context, *DateRangeRequest) (*PeakOrderTimesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPeakOrderTimes not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -536,6 +662,168 @@ func _OrderService_GetDiscountTotalAmount_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_GetOrderStatusDistribution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetOrderStatusDistribution(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetOrderStatusDistribution",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetOrderStatusDistribution(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetAverageDeliveryTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetAverageDeliveryTime(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetAverageDeliveryTime",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetAverageDeliveryTime(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetCartRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetCartRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetCartRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetCartRate(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetOrdersPerStore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetOrdersPerStore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetOrdersPerStore",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetOrdersPerStore(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetAverageItemsPerOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetAverageItemsPerOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetAverageItemsPerOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetAverageItemsPerOrder(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetPaymentStatusDistribution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetPaymentStatusDistribution(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetPaymentStatusDistribution",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetPaymentStatusDistribution(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetDeliveryStatusDistribution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetDeliveryStatusDistribution(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetDeliveryStatusDistribution",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetDeliveryStatusDistribution(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetOrdersByRegion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetOrdersByRegion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetOrdersByRegion",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetOrdersByRegion(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_GetPeakOrderTimes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetPeakOrderTimes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/order.OrderService/GetPeakOrderTimes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetPeakOrderTimes(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -602,6 +890,42 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDiscountTotalAmount",
 			Handler:    _OrderService_GetDiscountTotalAmount_Handler,
+		},
+		{
+			MethodName: "GetOrderStatusDistribution",
+			Handler:    _OrderService_GetOrderStatusDistribution_Handler,
+		},
+		{
+			MethodName: "GetAverageDeliveryTime",
+			Handler:    _OrderService_GetAverageDeliveryTime_Handler,
+		},
+		{
+			MethodName: "GetCartRate",
+			Handler:    _OrderService_GetCartRate_Handler,
+		},
+		{
+			MethodName: "GetOrdersPerStore",
+			Handler:    _OrderService_GetOrdersPerStore_Handler,
+		},
+		{
+			MethodName: "GetAverageItemsPerOrder",
+			Handler:    _OrderService_GetAverageItemsPerOrder_Handler,
+		},
+		{
+			MethodName: "GetPaymentStatusDistribution",
+			Handler:    _OrderService_GetPaymentStatusDistribution_Handler,
+		},
+		{
+			MethodName: "GetDeliveryStatusDistribution",
+			Handler:    _OrderService_GetDeliveryStatusDistribution_Handler,
+		},
+		{
+			MethodName: "GetOrdersByRegion",
+			Handler:    _OrderService_GetOrdersByRegion_Handler,
+		},
+		{
+			MethodName: "GetPeakOrderTimes",
+			Handler:    _OrderService_GetPeakOrderTimes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
