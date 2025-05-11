@@ -2630,7 +2630,7 @@ type RepeatCustomerRate struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
 	RepeatCustomerCount   int64                  `protobuf:"varint,1,opt,name=repeat_customer_count,json=repeatCustomerCount,proto3" json:"repeat_customer_count,omitempty"`
 	CustomerCount         int64                  `protobuf:"varint,2,opt,name=customer_count,json=customerCount,proto3" json:"customer_count,omitempty"`
-	PerRepeatCustomerRate int64                  `protobuf:"varint,3,opt,name=per_repeat_customer_rate,json=perRepeatCustomerRate,proto3" json:"per_repeat_customer_rate,omitempty"`
+	PerRepeatCustomerRate float64                `protobuf:"fixed64,3,opt,name=per_repeat_customer_rate,json=perRepeatCustomerRate,proto3" json:"per_repeat_customer_rate,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -2679,7 +2679,7 @@ func (x *RepeatCustomerRate) GetCustomerCount() int64 {
 	return 0
 }
 
-func (x *RepeatCustomerRate) GetPerRepeatCustomerRate() int64 {
+func (x *RepeatCustomerRate) GetPerRepeatCustomerRate() float64 {
 	if x != nil {
 		return x.PerRepeatCustomerRate
 	}
@@ -2958,7 +2958,7 @@ const file_order_order_proto_rawDesc = "" +
 	"\x12RepeatCustomerRate\x122\n" +
 	"\x15repeat_customer_count\x18\x01 \x01(\x03R\x13repeatCustomerCount\x12%\n" +
 	"\x0ecustomer_count\x18\x02 \x01(\x03R\rcustomerCount\x127\n" +
-	"\x18per_repeat_customer_rate\x18\x03 \x01(\x03R\x15perRepeatCustomerRate\"w\n" +
+	"\x18per_repeat_customer_rate\x18\x03 \x01(\x01R\x15perRepeatCustomerRate\"w\n" +
 	"\x15CustomerLifetimeValue\x12#\n" +
 	"\rtotal_revenue\x18\x01 \x01(\x01R\ftotalRevenue\x12%\n" +
 	"\x0ecustomer_count\x18\x02 \x01(\x03R\rcustomerCount\x12\x12\n" +
