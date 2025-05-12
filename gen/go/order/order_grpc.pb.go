@@ -45,6 +45,7 @@ const (
 	OrderService_GetPeakOrderTimes_FullMethodName             = "/order.OrderService/GetPeakOrderTimes"
 	OrderService_GetRepeatCustomerRate_FullMethodName         = "/order.OrderService/GetRepeatCustomerRate"
 	OrderService_GetCustomerLifetimeValue_FullMethodName      = "/order.OrderService/GetCustomerLifetimeValue"
+	OrderService_GetCustomerOrderData_FullMethodName          = "/order.OrderService/GetCustomerOrderData"
 )
 
 // OrderServiceClient is the client API for OrderService service.
@@ -77,6 +78,7 @@ type OrderServiceClient interface {
 	GetPeakOrderTimes(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*PeakOrderTimesResponse, error)
 	GetRepeatCustomerRate(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*RepeatCustomerRate, error)
 	GetCustomerLifetimeValue(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*CustomerLifetimeValue, error)
+	GetCustomerOrderData(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*CustomerDataResponse, error)
 }
 
 type orderServiceClient struct {
@@ -347,6 +349,16 @@ func (c *orderServiceClient) GetCustomerLifetimeValue(ctx context.Context, in *E
 	return out, nil
 }
 
+func (c *orderServiceClient) GetCustomerOrderData(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*CustomerDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CustomerDataResponse)
+	err := c.cc.Invoke(ctx, OrderService_GetCustomerOrderData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility.
@@ -377,6 +389,7 @@ type OrderServiceServer interface {
 	GetPeakOrderTimes(context.Context, *DateRangeRequest) (*PeakOrderTimesResponse, error)
 	GetRepeatCustomerRate(context.Context, *EmptyReq) (*RepeatCustomerRate, error)
 	GetCustomerLifetimeValue(context.Context, *EmptyReq) (*CustomerLifetimeValue, error)
+	GetCustomerOrderData(context.Context, *DateRangeRequest) (*CustomerDataResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -464,6 +477,9 @@ func (UnimplementedOrderServiceServer) GetRepeatCustomerRate(context.Context, *E
 }
 func (UnimplementedOrderServiceServer) GetCustomerLifetimeValue(context.Context, *EmptyReq) (*CustomerLifetimeValue, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCustomerLifetimeValue not implemented")
+}
+func (UnimplementedOrderServiceServer) GetCustomerOrderData(context.Context, *DateRangeRequest) (*CustomerDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCustomerOrderData not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 func (UnimplementedOrderServiceServer) testEmbeddedByValue()                      {}
@@ -954,6 +970,24 @@ func _OrderService_GetCustomerLifetimeValue_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_GetCustomerOrderData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetCustomerOrderData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_GetCustomerOrderData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetCustomerOrderData(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1064,6 +1098,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCustomerLifetimeValue",
 			Handler:    _OrderService_GetCustomerLifetimeValue_Handler,
+		},
+		{
+			MethodName: "GetCustomerOrderData",
+			Handler:    _OrderService_GetCustomerOrderData_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
