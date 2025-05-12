@@ -394,6 +394,110 @@ func (x *UpdateCartFulfilRes) GetIsFulfilled() bool {
 	return false
 }
 
+type CartAnalytics struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	CustomerCount      int64                  `protobuf:"varint,1,opt,name=customer_count,json=customerCount,proto3" json:"customer_count,omitempty"`
+	CartCount          int64                  `protobuf:"varint,2,opt,name=cart_count,json=cartCount,proto3" json:"cart_count,omitempty"`
+	FulfilledCartCount int64                  `protobuf:"varint,3,opt,name=fulfilled_cart_count,json=fulfilledCartCount,proto3" json:"fulfilled_cart_count,omitempty"`
+	AbandonedCartCount int64                  `protobuf:"varint,4,opt,name=abandoned_cart_count,json=abandonedCartCount,proto3" json:"abandoned_cart_count,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *CartAnalytics) Reset() {
+	*x = CartAnalytics{}
+	mi := &file_cart_cart_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CartAnalytics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CartAnalytics) ProtoMessage() {}
+
+func (x *CartAnalytics) ProtoReflect() protoreflect.Message {
+	mi := &file_cart_cart_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CartAnalytics.ProtoReflect.Descriptor instead.
+func (*CartAnalytics) Descriptor() ([]byte, []int) {
+	return file_cart_cart_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CartAnalytics) GetCustomerCount() int64 {
+	if x != nil {
+		return x.CustomerCount
+	}
+	return 0
+}
+
+func (x *CartAnalytics) GetCartCount() int64 {
+	if x != nil {
+		return x.CartCount
+	}
+	return 0
+}
+
+func (x *CartAnalytics) GetFulfilledCartCount() int64 {
+	if x != nil {
+		return x.FulfilledCartCount
+	}
+	return 0
+}
+
+func (x *CartAnalytics) GetAbandonedCartCount() int64 {
+	if x != nil {
+		return x.AbandonedCartCount
+	}
+	return 0
+}
+
+type EmptyReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EmptyReq) Reset() {
+	*x = EmptyReq{}
+	mi := &file_cart_cart_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmptyReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmptyReq) ProtoMessage() {}
+
+func (x *EmptyReq) ProtoReflect() protoreflect.Message {
+	mi := &file_cart_cart_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmptyReq.ProtoReflect.Descriptor instead.
+func (*EmptyReq) Descriptor() ([]byte, []int) {
+	return file_cart_cart_proto_rawDescGZIP(), []int{6}
+}
+
 var File_cart_cart_proto protoreflect.FileDescriptor
 
 const file_cart_cart_proto_rawDesc = "" +
@@ -430,10 +534,19 @@ const file_cart_cart_proto_rawDesc = "" +
 	"\fis_fulfilled\x18\x02 \x01(\bR\visFulfilled\"Q\n" +
 	"\x13UpdateCartFulfilRes\x12\x17\n" +
 	"\acart_id\x18\x01 \x01(\tR\x06cartId\x12!\n" +
-	"\fis_fulfilled\x18\x02 \x01(\bR\visFulfilled2\x90\x01\n" +
+	"\fis_fulfilled\x18\x02 \x01(\bR\visFulfilled\"\xb9\x01\n" +
+	"\rCartAnalytics\x12%\n" +
+	"\x0ecustomer_count\x18\x01 \x01(\x03R\rcustomerCount\x12\x1d\n" +
+	"\n" +
+	"cart_count\x18\x02 \x01(\x03R\tcartCount\x120\n" +
+	"\x14fulfilled_cart_count\x18\x03 \x01(\x03R\x12fulfilledCartCount\x120\n" +
+	"\x14abandoned_cart_count\x18\x04 \x01(\x03R\x12abandonedCartCount\"\n" +
+	"\n" +
+	"\bEmptyReq2\xcb\x01\n" +
 	"\vCartService\x125\n" +
 	"\fGetOrderCart\x12\x12.cart.OrderCartReq\x1a\x0f.cart.OrderCart\"\x00\x12J\n" +
-	"\x10UpdateCartFulfil\x12\x19.cart.UpdateCartFulfilReq\x1a\x19.cart.UpdateCartFulfilRes\"\x00B1Z/github.com/shantanu200/shared-proto/gen/go/cartb\x06proto3"
+	"\x10UpdateCartFulfil\x12\x19.cart.UpdateCartFulfilReq\x1a\x19.cart.UpdateCartFulfilRes\"\x00\x129\n" +
+	"\x10GetCartAnalytics\x12\x0e.cart.EmptyReq\x1a\x13.cart.CartAnalytics\"\x00B1Z/github.com/shantanu200/shared-proto/gen/go/cartb\x06proto3"
 
 var (
 	file_cart_cart_proto_rawDescOnce sync.Once
@@ -447,22 +560,26 @@ func file_cart_cart_proto_rawDescGZIP() []byte {
 	return file_cart_cart_proto_rawDescData
 }
 
-var file_cart_cart_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_cart_cart_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_cart_cart_proto_goTypes = []any{
 	(*OrderProduct)(nil),        // 0: cart.OrderProduct
 	(*OrderCart)(nil),           // 1: cart.OrderCart
 	(*OrderCartReq)(nil),        // 2: cart.OrderCartReq
 	(*UpdateCartFulfilReq)(nil), // 3: cart.UpdateCartFulfilReq
 	(*UpdateCartFulfilRes)(nil), // 4: cart.UpdateCartFulfilRes
+	(*CartAnalytics)(nil),       // 5: cart.CartAnalytics
+	(*EmptyReq)(nil),            // 6: cart.EmptyReq
 }
 var file_cart_cart_proto_depIdxs = []int32{
 	0, // 0: cart.OrderCart.products:type_name -> cart.OrderProduct
 	2, // 1: cart.CartService.GetOrderCart:input_type -> cart.OrderCartReq
 	3, // 2: cart.CartService.UpdateCartFulfil:input_type -> cart.UpdateCartFulfilReq
-	1, // 3: cart.CartService.GetOrderCart:output_type -> cart.OrderCart
-	4, // 4: cart.CartService.UpdateCartFulfil:output_type -> cart.UpdateCartFulfilRes
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
+	6, // 3: cart.CartService.GetCartAnalytics:input_type -> cart.EmptyReq
+	1, // 4: cart.CartService.GetOrderCart:output_type -> cart.OrderCart
+	4, // 5: cart.CartService.UpdateCartFulfil:output_type -> cart.UpdateCartFulfilRes
+	5, // 6: cart.CartService.GetCartAnalytics:output_type -> cart.CartAnalytics
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -479,7 +596,7 @@ func file_cart_cart_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cart_cart_proto_rawDesc), len(file_cart_cart_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
