@@ -47,6 +47,7 @@ const (
 	OrderService_GetCustomerLifetimeValue_FullMethodName      = "/order.OrderService/GetCustomerLifetimeValue"
 	OrderService_GetCustomerOrderData_FullMethodName          = "/order.OrderService/GetCustomerOrderData"
 	OrderService_GetStoreAnalytics_FullMethodName             = "/order.OrderService/GetStoreAnalytics"
+	OrderService_GetTopProductsByStore_FullMethodName         = "/order.OrderService/GetTopProductsByStore"
 )
 
 // OrderServiceClient is the client API for OrderService service.
@@ -81,6 +82,7 @@ type OrderServiceClient interface {
 	GetCustomerLifetimeValue(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*CustomerLifetimeValue, error)
 	GetCustomerOrderData(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*CustomerDataResponse, error)
 	GetStoreAnalytics(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*StoreAnalyticsResponse, error)
+	GetTopProductsByStore(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*TopProductsResponse, error)
 }
 
 type orderServiceClient struct {
@@ -371,6 +373,16 @@ func (c *orderServiceClient) GetStoreAnalytics(ctx context.Context, in *DateRang
 	return out, nil
 }
 
+func (c *orderServiceClient) GetTopProductsByStore(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*TopProductsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TopProductsResponse)
+	err := c.cc.Invoke(ctx, OrderService_GetTopProductsByStore_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility.
@@ -403,6 +415,7 @@ type OrderServiceServer interface {
 	GetCustomerLifetimeValue(context.Context, *EmptyReq) (*CustomerLifetimeValue, error)
 	GetCustomerOrderData(context.Context, *DateRangeRequest) (*CustomerDataResponse, error)
 	GetStoreAnalytics(context.Context, *DateRangeRequest) (*StoreAnalyticsResponse, error)
+	GetTopProductsByStore(context.Context, *DateRangeRequest) (*TopProductsResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -496,6 +509,9 @@ func (UnimplementedOrderServiceServer) GetCustomerOrderData(context.Context, *Da
 }
 func (UnimplementedOrderServiceServer) GetStoreAnalytics(context.Context, *DateRangeRequest) (*StoreAnalyticsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStoreAnalytics not implemented")
+}
+func (UnimplementedOrderServiceServer) GetTopProductsByStore(context.Context, *DateRangeRequest) (*TopProductsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTopProductsByStore not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 func (UnimplementedOrderServiceServer) testEmbeddedByValue()                      {}
@@ -1022,6 +1038,24 @@ func _OrderService_GetStoreAnalytics_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_GetTopProductsByStore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DateRangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).GetTopProductsByStore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_GetTopProductsByStore_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).GetTopProductsByStore(ctx, req.(*DateRangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1140,6 +1174,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetStoreAnalytics",
 			Handler:    _OrderService_GetStoreAnalytics_Handler,
+		},
+		{
+			MethodName: "GetTopProductsByStore",
+			Handler:    _OrderService_GetTopProductsByStore_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
