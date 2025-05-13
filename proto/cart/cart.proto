@@ -45,7 +45,17 @@ message UpdateCartFulfilRes {
   bool  is_fulfilled = 2;
 }
 
+message CartAnalytics {
+  int64 customer_count = 1;
+  int64 cart_count = 2;
+  int64 fulfilled_cart_count = 3;
+  int64 abandoned_cart_count = 4;
+}
+
+message EmptyReq {}
+
 service CartService {
   rpc GetOrderCart(OrderCartReq) returns (OrderCart) {};
   rpc UpdateCartFulfil(UpdateCartFulfilReq) returns (UpdateCartFulfilRes) {};
+  rpc GetCartAnalytics(EmptyReq) returns (CartAnalytics) {};
 }

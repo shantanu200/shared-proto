@@ -2953,12 +2953,11 @@ func (x *CustomerDataResponse) GetData() []*CustomerData {
 type StoreAnalytics struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	StoreId             int64                  `protobuf:"varint,1,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	StoreName           string                 `protobuf:"bytes,2,opt,name=store_name,json=storeName,proto3" json:"store_name,omitempty"`
-	TotalRevenue        float64                `protobuf:"fixed64,3,opt,name=total_revenue,json=totalRevenue,proto3" json:"total_revenue,omitempty"`
-	CompletedOrderCount int64                  `protobuf:"varint,4,opt,name=completed_order_count,json=completedOrderCount,proto3" json:"completed_order_count,omitempty"`
-	AvgOrderValue       float64                `protobuf:"fixed64,5,opt,name=avg_order_value,json=avgOrderValue,proto3" json:"avg_order_value,omitempty"`
-	AvgDeliveryTime     float64                `protobuf:"fixed64,6,opt,name=avg_delivery_time,json=avgDeliveryTime,proto3" json:"avg_delivery_time,omitempty"`
-	RefundedOrderCount  int64                  `protobuf:"varint,7,opt,name=refunded_order_count,json=refundedOrderCount,proto3" json:"refunded_order_count,omitempty"`
+	TotalRevenue        float64                `protobuf:"fixed64,2,opt,name=total_revenue,json=totalRevenue,proto3" json:"total_revenue,omitempty"`
+	CompletedOrderCount int64                  `protobuf:"varint,3,opt,name=completed_order_count,json=completedOrderCount,proto3" json:"completed_order_count,omitempty"`
+	AvgOrderValue       float64                `protobuf:"fixed64,4,opt,name=avg_order_value,json=avgOrderValue,proto3" json:"avg_order_value,omitempty"`
+	AvgDeliveryTime     float64                `protobuf:"fixed64,5,opt,name=avg_delivery_time,json=avgDeliveryTime,proto3" json:"avg_delivery_time,omitempty"`
+	RefundedOrderCount  int64                  `protobuf:"varint,6,opt,name=refunded_order_count,json=refundedOrderCount,proto3" json:"refunded_order_count,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -2998,13 +2997,6 @@ func (x *StoreAnalytics) GetStoreId() int64 {
 		return x.StoreId
 	}
 	return 0
-}
-
-func (x *StoreAnalytics) GetStoreName() string {
-	if x != nil {
-		return x.StoreName
-	}
-	return ""
 }
 
 func (x *StoreAnalytics) GetTotalRevenue() float64 {
@@ -3346,16 +3338,14 @@ const file_order_order_proto_rawDesc = "" +
 	"\n" +
 	"pagination\x18\x01 \x01(\v2\x19.order.PaginationResponseR\n" +
 	"pagination\x12'\n" +
-	"\x04data\x18\x02 \x03(\v2\x13.order.CustomerDataR\x04data\"\xa9\x02\n" +
+	"\x04data\x18\x02 \x03(\v2\x13.order.CustomerDataR\x04data\"\x8a\x02\n" +
 	"\x0eStoreAnalytics\x12\x19\n" +
-	"\bstore_id\x18\x01 \x01(\x03R\astoreId\x12\x1d\n" +
-	"\n" +
-	"store_name\x18\x02 \x01(\tR\tstoreName\x12#\n" +
-	"\rtotal_revenue\x18\x03 \x01(\x01R\ftotalRevenue\x122\n" +
-	"\x15completed_order_count\x18\x04 \x01(\x03R\x13completedOrderCount\x12&\n" +
-	"\x0favg_order_value\x18\x05 \x01(\x01R\ravgOrderValue\x12*\n" +
-	"\x11avg_delivery_time\x18\x06 \x01(\x01R\x0favgDeliveryTime\x120\n" +
-	"\x14refunded_order_count\x18\a \x01(\x03R\x12refundedOrderCount\"\x8c\x01\n" +
+	"\bstore_id\x18\x01 \x01(\x03R\astoreId\x12#\n" +
+	"\rtotal_revenue\x18\x02 \x01(\x01R\ftotalRevenue\x122\n" +
+	"\x15completed_order_count\x18\x03 \x01(\x03R\x13completedOrderCount\x12&\n" +
+	"\x0favg_order_value\x18\x04 \x01(\x01R\ravgOrderValue\x12*\n" +
+	"\x11avg_delivery_time\x18\x05 \x01(\x01R\x0favgDeliveryTime\x120\n" +
+	"\x14refunded_order_count\x18\x06 \x01(\x03R\x12refundedOrderCount\"\x8c\x01\n" +
 	"\x16StoreAnalyticsResponse\x12\x14\n" +
 	"\x05start\x18\x01 \x01(\tR\x05start\x12\x10\n" +
 	"\x03end\x18\x02 \x01(\tR\x03end\x12\x1f\n" +

@@ -6,8 +6,8 @@ option go_package = "github.com/shantanu200/shared-proto/gen/go/shop";
 
 message ShopReq {
   int64 shop_id = 1;
-
 }
+
 
 message Shop {
   string id = 1;

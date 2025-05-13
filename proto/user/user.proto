@@ -4,7 +4,6 @@ package user;
 
 option go_package = "github.com/shantanu200/shared-proto/gen/go/user";
 
-import "google/protobuf/timestamp.proto";
 
 message UserAddress {
   string address_id = 1;
@@ -40,7 +39,29 @@ message User {
   int64 user_id = 6;
 }
 
+message DateRangeRequest {
+  string start_date = 1;
+  string end_date = 2;
+}
+
+message UserTotalCount {
+  string start_date = 1;
+  string end_date = 2;
+  int64 customer_count = 3;
+}
+
+
+message ActiveUserTotalCount {
+  string start_date = 1;
+  string end_date = 2;
+  int64 active_customer_count = 3;
+}
+
+message EmptyReq {}
 service UserService {
   rpc GetUserAddressById(AddressReq) returns (UserAddress);
   rpc GetUser(UserReq) returns (User);
+  rpc UpdateOrderPlaced(UserReq) returns (EmptyReq);
+  rpc GetUserTotalCount(DateRangeRequest) returns (UserTotalCount);
+  rpc GetActiveUserCount(DateRangeRequest) returns (ActiveUserTotalCount);
 }

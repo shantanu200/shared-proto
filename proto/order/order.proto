@@ -28,12 +28,330 @@ message Product {
   double gst_per = 5;
   string product_name = 6;
   double price_per_kg = 7;
-}
+};
 
 message OrderReq {
   string order_id = 1;
 }
 
+message RefundTotalAmount {
+  double total_refund_amount = 1;
+  int64 refunded_order_count = 2;
+}
+
+message RefundRate {
+  double refund_rate = 1;
+  int64 refunded_order_count = 2;
+  int64 completed_order_count = 3;
+}
+
+message RefundSuccessRate {
+  double refund_success_failure_rate = 1;
+  double refund_completed_order_count = 2;
+  int64 refund_failed_order_count = 3;
+  int64 refund_attempts_count = 4;
+}
+
+message AvgRefundProcessingTime {
+  double avg_refund_processing_time = 1;
+}
+
+message RefundProduct {
+  string product_id = 1;
+  double total_refund_amount = 2; 
+  double total_refund_quantity = 3;
+}
+
+message RefundsByProduct {
+  int64 product_count = 1;
+  repeated RefundProduct products = 2; 
+}
+
+message RefundStore {
+  int64 store_id = 1;
+  int64 refund_count = 2;
+}
+
+message RefundStores {
+  int64 store_count = 1;
+  repeated RefundStore stores = 2;
+}
+
+// Common request message for date range filtering
+message DateRangeRequest {
+  string start_date = 1; // Format: YYYY-MM-DD
+  string end_date = 2;   // Format: YYYY-MM-DD
+  int64 store_id = 3;    // Optional store filter, 0 means all stores
+  int64 page = 4;
+  int64 size = 5;
+}
+
+// Request for sales trend data with granularity
+message SalesTrendRequest {
+  string start_date = 1;    // Format: YYYY-MM-DD
+  string end_date = 2;      // Format: YYYY-MM-DD
+  string granularity = 3;   // "daily", "weekly", or "monthly"
+  int64 store_id = 4;       // Optional store filter, 0 means all stores
+}
+
+// Response for total revenue
+message TotalRevenueResponse {
+  string start_date = 1;
+  string end_date = 2;
+  double total_revenue = 3;
+  int64 completed_order_count = 4;
+}
+
+// Response for store revenue
+message StoreRevenueResponse {
+  string start_date = 1;
+  string end_date = 2;
+  repeated StoreRevenue data = 3;
+}
+
+message StoreRevenue {
+  int64 store_id = 1;
+  double total_revenue = 2;
+  int64 completed_order_count = 3;
+}
+
+// Response for completed order count
+message CompletedOrderCountResponse {
+  string start_date = 1;
+  string end_date = 2;
+  int64 completed_order_count = 3;
+}
+
+message OrderTypeRevenueResponse {
+  string start_date = 1;
+  string end_date = 2;
+  repeated OrderTypeRevenue data = 3;
+}
+
+message OrderTypeRevenue {
+  string order_type = 1;
+  double total_revenue = 2;
+  int64 completed_order_count = 3;
+}
+
+message TaxBreakdownResponse {
+  string start_date = 1;
+  string end_date = 2;
+  double total_tax_collected = 3;
+  repeated TaxBreakdownItem data = 4;
+}
+
+message TaxBreakdownItem {
+  string tax_type = 1;
+  double total_tax_collected = 2;
+  int64 completed_order_count = 3;
+}
+
+message AverageOrderValueResponse {
+  string start_date = 1;
+  string end_date = 2;
+  double average_order_value = 3;
+}
+
+message SalesTrendResponse {
+  string granularity = 1;
+  repeated SalesTrendItem data = 2;
+}
+
+message SalesTrendItem {
+  string period = 1;
+  double total_revenue = 2;
+  int64 completed_order_count = 3;
+}
+
+message DiscountAmount {
+  double total_discount_amount = 1;
+  int64 completed_order_count = 2;
+}
+
+
+message OrderStatusItem {
+  string order_status = 1;
+  int64 order_count = 2;
+}
+
+message OrderStatusDistributionResponse {
+  string start = 1;
+  string end = 2;
+  int64 total_order_count = 3;
+  repeated OrderStatusItem data = 4;
+}
+
+message DeliveryTimeItem {
+  string delivery_partner = 1;
+  int64 order_count = 2;
+  double avg_delivery_time = 3; // in seconds
+}
+
+message AverageDeliveryTimeResponse {
+  string start = 1;
+  string end = 2;
+  int64 completed_order_count = 3;
+  repeated DeliveryTimeItem data = 4;
+}
+
+message CartRateResponse {
+  int64 customer_count = 1;
+  int64 cart_count = 2;
+  int64 fulfilled_cart_count = 3;
+  int64 abandoned_cart_count = 4;
+}
+
+message StoreOrderItem {
+  int64 store_id = 1;
+  string store_name = 2;
+  int64 total_order_count = 3;
+  int64 pending_order_count = 4;
+  int64 processing_order_count = 5;
+  int64 completed_order_count = 6;
+  int64 cancelled_order_count = 7;
+  int64 refund_order_count = 8;
+}
+
+message OrdersPerStoreResponse {
+  string start = 1;
+  string end = 2;
+  repeated StoreOrderItem data = 3;
+}
+
+message AverageItemsPerOrderResponse {
+  double avg_items_per_order = 1;
+  int64 completed_order_count = 2;
+}
+
+message PaymentStatusItem {
+  string payment_status = 1;
+  int64 order_count = 2;
+}
+
+message PaymentStatusDistributionResponse {
+  string start = 1;
+  string end = 2;
+  int64 total_order_count = 3;
+  repeated PaymentStatusItem data = 4;
+}
+
+message DeliveryStatusItem {
+  string delivery_status = 1;
+  int64 order_count = 2;
+}
+
+message DeliveryStatusDistributionResponse {
+  string start = 1;
+  string end = 2;
+  int64 completed_order_count = 3;
+  repeated DeliveryStatusItem data = 4;
+}
+
+message RegionOrderItem {
+  string pincode = 1;
+  int64 order_count = 2;
+  int64 customer_count = 3;
+}
+
+message OrdersByRegionResponse {
+  string start = 1;
+  string end = 2;
+  int64 completed_order_count = 3;
+  repeated RegionOrderItem data = 4;
+}
+
+message PeakOrderTimeItem {
+  string date = 1;
+  int64 order_count = 2;
+  int32 hour = 3;
+}
+
+message PeakOrderTimesResponse {
+  repeated PeakOrderTimeItem data = 1;
+}
+
+message EmptyReq {}
+
+message RepeatCustomerRate {
+  int64 repeat_customer_count = 1;
+  int64 customer_count = 2;
+  double per_repeat_customer_rate = 3;
+}
+
+message CustomerLifetimeValue {
+  double total_revenue = 1;
+  int64 customer_count = 2;
+  double cltv = 3;
+}
+
+message CustomerData {
+  string customer_id = 1;
+  int64 order_count = 2;
+  double total_revenue_from_customer = 3;
+}
+
+message PaginationResponse {
+  int64 offset = 1;
+  int64 limit = 2;
+  int64 total = 3;
+  int64 page_total = 4;
+  int64 page_size = 5;
+}
+
+message CustomerDataResponse {
+  PaginationResponse pagination = 1;
+  repeated CustomerData data = 2;
+}
+
+message StoreAnalytics {
+    int64 store_id = 1;
+    double total_revenue = 2;
+    int64 completed_order_count = 3;
+    double avg_order_value = 4;
+    double avg_delivery_time = 5;
+    int64 refunded_order_count = 6;
+}
+
+message StoreAnalyticsResponse {
+    string start = 1;
+    string end = 2;
+    int32 store_count = 3;
+    repeated StoreAnalytics data = 4;
+}
+
 service OrderService {
   rpc GetOrderByID(OrderReq) returns (Order) {};
+  rpc GetRefundTotalAmount(EmptyReq) returns (RefundTotalAmount) {};
+  rpc GetRefundRate(EmptyReq) returns (RefundRate) {};
+  rpc GetRefundSuccessRate(EmptyReq) returns (RefundSuccessRate) {};
+  rpc GetAvgRefundProcessingTime(EmptyReq) returns (AvgRefundProcessingTime) {};
+  rpc GetRefundsByProduct(EmptyReq) returns (RefundsByProduct) {};
+  rpc GetRefundStores(EmptyReq) returns (RefundStores) {};
+
+  rpc GetTotalRevenue(DateRangeRequest) returns (TotalRevenueResponse) {};
+  rpc GetStoreRevenue(DateRangeRequest) returns (StoreRevenueResponse) {};
+  rpc GetCompletedOrderCount(DateRangeRequest) returns (CompletedOrderCountResponse) {};
+  rpc GetOrderTypeRevenue(DateRangeRequest) returns (OrderTypeRevenueResponse) {};
+  rpc GetTaxBreakdown(DateRangeRequest) returns (TaxBreakdownResponse) {};
+  rpc GetAverageOrderValue(DateRangeRequest) returns (AverageOrderValueResponse) {};
+  rpc GetSalesTrend(SalesTrendRequest) returns (SalesTrendResponse) {};
+  rpc GetDiscountTotalAmount(EmptyReq) returns (DiscountAmount) {};
+
+  rpc GetOrderStatusDistribution(DateRangeRequest) returns (OrderStatusDistributionResponse);
+  rpc GetAverageDeliveryTime(DateRangeRequest) returns (AverageDeliveryTimeResponse);
+  rpc GetCartRate(DateRangeRequest) returns (CartRateResponse);
+  rpc GetOrdersPerStore(DateRangeRequest) returns (OrdersPerStoreResponse);
+  rpc GetAverageItemsPerOrder(DateRangeRequest) returns (AverageItemsPerOrderResponse);
+  rpc GetPaymentStatusDistribution(DateRangeRequest) returns (PaymentStatusDistributionResponse);
+  rpc GetDeliveryStatusDistribution(DateRangeRequest) returns (DeliveryStatusDistributionResponse);
+  rpc GetOrdersByRegion(DateRangeRequest) returns (OrdersByRegionResponse);
+  rpc GetPeakOrderTimes(DateRangeRequest) returns (PeakOrderTimesResponse);
+
+  rpc GetRepeatCustomerRate(EmptyReq) returns (RepeatCustomerRate) {};
+  rpc GetCustomerLifetimeValue(EmptyReq) returns (CustomerLifetimeValue) {};
+  rpc GetCustomerOrderData(DateRangeRequest) returns (CustomerDataResponse) {};
+  rpc GetStoreAnalytics(DateRangeRequest) returns (StoreAnalyticsResponse) {}
 }
+
+
