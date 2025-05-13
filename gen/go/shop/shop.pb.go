@@ -165,6 +165,162 @@ func (x *Shop) GetAddress() string {
 	return ""
 }
 
+type StoreAdminAnalyticsResult struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	StoreCount      int64                  `protobuf:"varint,1,opt,name=store_count,json=storeCount,proto3" json:"store_count,omitempty"`
+	TotalAdminCount int64                  `protobuf:"varint,2,opt,name=total_admin_count,json=totalAdminCount,proto3" json:"total_admin_count,omitempty"`
+	Data            []*StoreAdminAnalytics `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *StoreAdminAnalyticsResult) Reset() {
+	*x = StoreAdminAnalyticsResult{}
+	mi := &file_shop_shop_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StoreAdminAnalyticsResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StoreAdminAnalyticsResult) ProtoMessage() {}
+
+func (x *StoreAdminAnalyticsResult) ProtoReflect() protoreflect.Message {
+	mi := &file_shop_shop_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StoreAdminAnalyticsResult.ProtoReflect.Descriptor instead.
+func (*StoreAdminAnalyticsResult) Descriptor() ([]byte, []int) {
+	return file_shop_shop_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *StoreAdminAnalyticsResult) GetStoreCount() int64 {
+	if x != nil {
+		return x.StoreCount
+	}
+	return 0
+}
+
+func (x *StoreAdminAnalyticsResult) GetTotalAdminCount() int64 {
+	if x != nil {
+		return x.TotalAdminCount
+	}
+	return 0
+}
+
+func (x *StoreAdminAnalyticsResult) GetData() []*StoreAdminAnalytics {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type StoreAdminAnalytics struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StoreId       int64                  `protobuf:"varint,1,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	StoreName     string                 `protobuf:"bytes,2,opt,name=store_name,json=storeName,proto3" json:"store_name,omitempty"`
+	AdminCount    int64                  `protobuf:"varint,3,opt,name=admin_count,json=adminCount,proto3" json:"admin_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StoreAdminAnalytics) Reset() {
+	*x = StoreAdminAnalytics{}
+	mi := &file_shop_shop_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StoreAdminAnalytics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StoreAdminAnalytics) ProtoMessage() {}
+
+func (x *StoreAdminAnalytics) ProtoReflect() protoreflect.Message {
+	mi := &file_shop_shop_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StoreAdminAnalytics.ProtoReflect.Descriptor instead.
+func (*StoreAdminAnalytics) Descriptor() ([]byte, []int) {
+	return file_shop_shop_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *StoreAdminAnalytics) GetStoreId() int64 {
+	if x != nil {
+		return x.StoreId
+	}
+	return 0
+}
+
+func (x *StoreAdminAnalytics) GetStoreName() string {
+	if x != nil {
+		return x.StoreName
+	}
+	return ""
+}
+
+func (x *StoreAdminAnalytics) GetAdminCount() int64 {
+	if x != nil {
+		return x.AdminCount
+	}
+	return 0
+}
+
+type EmptyReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EmptyReq) Reset() {
+	*x = EmptyReq{}
+	mi := &file_shop_shop_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmptyReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmptyReq) ProtoMessage() {}
+
+func (x *EmptyReq) ProtoReflect() protoreflect.Message {
+	mi := &file_shop_shop_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmptyReq.ProtoReflect.Descriptor instead.
+func (*EmptyReq) Descriptor() ([]byte, []int) {
+	return file_shop_shop_proto_rawDescGZIP(), []int{4}
+}
+
 var File_shop_shop_proto protoreflect.FileDescriptor
 
 const file_shop_shop_proto_rawDesc = "" +
@@ -180,10 +336,24 @@ const file_shop_shop_proto_rawDesc = "" +
 	"\tis_active\x18\x05 \x01(\bR\bisActive\x12\x1a\n" +
 	"\blatitude\x18\x06 \x01(\x01R\blatitude\x12\x1c\n" +
 	"\tlongitude\x18\a \x01(\x01R\tlongitude\x12\x18\n" +
-	"\aaddress\x18\b \x01(\tR\aaddress25\n" +
+	"\aaddress\x18\b \x01(\tR\aaddress\"\x97\x01\n" +
+	"\x19StoreAdminAnalyticsResult\x12\x1f\n" +
+	"\vstore_count\x18\x01 \x01(\x03R\n" +
+	"storeCount\x12*\n" +
+	"\x11total_admin_count\x18\x02 \x01(\x03R\x0ftotalAdminCount\x12-\n" +
+	"\x04data\x18\x03 \x03(\v2\x19.shop.StoreAdminAnalyticsR\x04data\"p\n" +
+	"\x13StoreAdminAnalytics\x12\x19\n" +
+	"\bstore_id\x18\x01 \x01(\x03R\astoreId\x12\x1d\n" +
+	"\n" +
+	"store_name\x18\x02 \x01(\tR\tstoreName\x12\x1f\n" +
+	"\vadmin_count\x18\x03 \x01(\x03R\n" +
+	"adminCount\"\n" +
+	"\n" +
+	"\bEmptyReq2\x82\x01\n" +
 	"\vShopService\x12&\n" +
 	"\aGetShop\x12\r.shop.ShopReq\x1a\n" +
-	".shop.Shop\"\x00B1Z/github.com/shantanu200/shared-proto/gen/go/shopb\x06proto3"
+	".shop.Shop\"\x00\x12K\n" +
+	"\x16GetStoreAdminAnalytics\x12\x0e.shop.EmptyReq\x1a\x1f.shop.StoreAdminAnalyticsResult\"\x00B1Z/github.com/shantanu200/shared-proto/gen/go/shopb\x06proto3"
 
 var (
 	file_shop_shop_proto_rawDescOnce sync.Once
@@ -197,19 +367,25 @@ func file_shop_shop_proto_rawDescGZIP() []byte {
 	return file_shop_shop_proto_rawDescData
 }
 
-var file_shop_shop_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_shop_shop_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_shop_shop_proto_goTypes = []any{
-	(*ShopReq)(nil), // 0: shop.ShopReq
-	(*Shop)(nil),    // 1: shop.Shop
+	(*ShopReq)(nil),                   // 0: shop.ShopReq
+	(*Shop)(nil),                      // 1: shop.Shop
+	(*StoreAdminAnalyticsResult)(nil), // 2: shop.StoreAdminAnalyticsResult
+	(*StoreAdminAnalytics)(nil),       // 3: shop.StoreAdminAnalytics
+	(*EmptyReq)(nil),                  // 4: shop.EmptyReq
 }
 var file_shop_shop_proto_depIdxs = []int32{
-	0, // 0: shop.ShopService.GetShop:input_type -> shop.ShopReq
-	1, // 1: shop.ShopService.GetShop:output_type -> shop.Shop
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: shop.StoreAdminAnalyticsResult.data:type_name -> shop.StoreAdminAnalytics
+	0, // 1: shop.ShopService.GetShop:input_type -> shop.ShopReq
+	4, // 2: shop.ShopService.GetStoreAdminAnalytics:input_type -> shop.EmptyReq
+	1, // 3: shop.ShopService.GetShop:output_type -> shop.Shop
+	2, // 4: shop.ShopService.GetStoreAdminAnalytics:output_type -> shop.StoreAdminAnalyticsResult
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_shop_shop_proto_init() }
@@ -223,7 +399,7 @@ func file_shop_shop_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shop_shop_proto_rawDesc), len(file_shop_shop_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
