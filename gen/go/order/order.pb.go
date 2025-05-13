@@ -745,6 +745,7 @@ type DateRangeRequest struct {
 	StoreId       int64                  `protobuf:"varint,3,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`      // Optional store filter, 0 means all stores
 	Page          int64                  `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`
 	Size          int64                  `protobuf:"varint,5,opt,name=size,proto3" json:"size,omitempty"`
+	SortBy        string                 `protobuf:"bytes,6,opt,name=sort_by,json=sortBy,proto3" json:"sort_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -812,6 +813,13 @@ func (x *DateRangeRequest) GetSize() int64 {
 		return x.Size
 	}
 	return 0
+}
+
+func (x *DateRangeRequest) GetSortBy() string {
+	if x != nil {
+		return x.SortBy
+	}
+	return ""
 }
 
 // Request for sales trend data with granularity
@@ -3165,14 +3173,15 @@ const file_order_order_proto_rawDesc = "" +
 	"\fRefundStores\x12\x1f\n" +
 	"\vstore_count\x18\x01 \x01(\x03R\n" +
 	"storeCount\x12*\n" +
-	"\x06stores\x18\x02 \x03(\v2\x12.order.RefundStoreR\x06stores\"\x8f\x01\n" +
+	"\x06stores\x18\x02 \x03(\v2\x12.order.RefundStoreR\x06stores\"\xa8\x01\n" +
 	"\x10DateRangeRequest\x12\x1d\n" +
 	"\n" +
 	"start_date\x18\x01 \x01(\tR\tstartDate\x12\x19\n" +
 	"\bend_date\x18\x02 \x01(\tR\aendDate\x12\x19\n" +
 	"\bstore_id\x18\x03 \x01(\x03R\astoreId\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x03R\x04page\x12\x12\n" +
-	"\x04size\x18\x05 \x01(\x03R\x04size\"\x8a\x01\n" +
+	"\x04size\x18\x05 \x01(\x03R\x04size\x12\x17\n" +
+	"\asort_by\x18\x06 \x01(\tR\x06sortBy\"\x8a\x01\n" +
 	"\x11SalesTrendRequest\x12\x1d\n" +
 	"\n" +
 	"start_date\x18\x01 \x01(\tR\tstartDate\x12\x19\n" +
