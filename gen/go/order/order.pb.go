@@ -3314,6 +3314,7 @@ type BestSellingProductItem struct {
 	QuantitySold   int64                  `protobuf:"varint,2,opt,name=quantity_sold,json=quantitySold,proto3" json:"quantity_sold,omitempty"`
 	AvgPortionSize float64                `protobuf:"fixed64,3,opt,name=avg_portion_size,json=avgPortionSize,proto3" json:"avg_portion_size,omitempty"`
 	OrderCount     int64                  `protobuf:"varint,4,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
+	TotalRevenue   float64                `protobuf:"fixed64,5,opt,name=total_revenue,json=totalRevenue,proto3" json:"total_revenue,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -3372,6 +3373,13 @@ func (x *BestSellingProductItem) GetAvgPortionSize() float64 {
 func (x *BestSellingProductItem) GetOrderCount() int64 {
 	if x != nil {
 		return x.OrderCount
+	}
+	return 0
+}
+
+func (x *BestSellingProductItem) GetTotalRevenue() float64 {
+	if x != nil {
+		return x.TotalRevenue
 	}
 	return 0
 }
@@ -3803,14 +3811,15 @@ const file_order_order_proto_rawDesc = "" +
 	"\vstore_count\x18\x01 \x01(\x05R\n" +
 	"storeCount\x12<\n" +
 	"\x1btop_product_count_per_store\x18\x02 \x01(\x05R\x17topProductCountPerStore\x12+\n" +
-	"\x04data\x18\x03 \x03(\v2\x17.order.StoreTopProductsR\x04data\"\xa7\x01\n" +
+	"\x04data\x18\x03 \x03(\v2\x17.order.StoreTopProductsR\x04data\"\xcc\x01\n" +
 	"\x16BestSellingProductItem\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\tR\tproductId\x12#\n" +
 	"\rquantity_sold\x18\x02 \x01(\x03R\fquantitySold\x12(\n" +
 	"\x10avg_portion_size\x18\x03 \x01(\x01R\x0eavgPortionSize\x12\x1f\n" +
 	"\vorder_count\x18\x04 \x01(\x03R\n" +
-	"orderCount\"\x8a\x01\n" +
+	"orderCount\x12#\n" +
+	"\rtotal_revenue\x18\x05 \x01(\x01R\ftotalRevenue\"\x8a\x01\n" +
 	"\n" +
 	"Pagination\x12\x16\n" +
 	"\x06offset\x18\x01 \x01(\x03R\x06offset\x12\x14\n" +
