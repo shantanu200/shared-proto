@@ -251,12 +251,12 @@ func (x *GetCartProductResponse) GetTotalCount() int32 {
 }
 
 type ProductCountAnalytics struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	TotalCount           int64                  `protobuf:"varint,1,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	ActiveProductCount   int64                  `protobuf:"varint,2,opt,name=active_product_count,json=activeProductCount,proto3" json:"active_product_count,omitempty"`
-	InactiveProductCount int64                  `protobuf:"varint,3,opt,name=inactive_product_count,json=inactiveProductCount,proto3" json:"inactive_product_count,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	TotalProductCount     int64                  `protobuf:"varint,1,opt,name=total_product_count,json=totalProductCount,proto3" json:"total_product_count,omitempty"`
+	VisibleProductCount   int64                  `protobuf:"varint,2,opt,name=visible_product_count,json=visibleProductCount,proto3" json:"visible_product_count,omitempty"`
+	InvisibleProductCount int64                  `protobuf:"varint,3,opt,name=invisible_product_count,json=invisibleProductCount,proto3" json:"invisible_product_count,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ProductCountAnalytics) Reset() {
@@ -289,23 +289,23 @@ func (*ProductCountAnalytics) Descriptor() ([]byte, []int) {
 	return file_product_product_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *ProductCountAnalytics) GetTotalCount() int64 {
+func (x *ProductCountAnalytics) GetTotalProductCount() int64 {
 	if x != nil {
-		return x.TotalCount
+		return x.TotalProductCount
 	}
 	return 0
 }
 
-func (x *ProductCountAnalytics) GetActiveProductCount() int64 {
+func (x *ProductCountAnalytics) GetVisibleProductCount() int64 {
 	if x != nil {
-		return x.ActiveProductCount
+		return x.VisibleProductCount
 	}
 	return 0
 }
 
-func (x *ProductCountAnalytics) GetInactiveProductCount() int64 {
+func (x *ProductCountAnalytics) GetInvisibleProductCount() int64 {
 	if x != nil {
-		return x.InactiveProductCount
+		return x.InvisibleProductCount
 	}
 	return 0
 }
@@ -654,12 +654,11 @@ const file_product_product_proto_rawDesc = "" +
 	"\x16GetCartProductResponse\x120\n" +
 	"\bproducts\x18\x01 \x03(\v2\x14.product.CartProductR\bproducts\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
-	"totalCount\"\xa0\x01\n" +
-	"\x15ProductCountAnalytics\x12\x1f\n" +
-	"\vtotal_count\x18\x01 \x01(\x03R\n" +
-	"totalCount\x120\n" +
-	"\x14active_product_count\x18\x02 \x01(\x03R\x12activeProductCount\x124\n" +
-	"\x16inactive_product_count\x18\x03 \x01(\x03R\x14inactiveProductCount\"\xde\x03\n" +
+	"totalCount\"\xb3\x01\n" +
+	"\x15ProductCountAnalytics\x12.\n" +
+	"\x13total_product_count\x18\x01 \x01(\x03R\x11totalProductCount\x122\n" +
+	"\x15visible_product_count\x18\x02 \x01(\x03R\x13visibleProductCount\x126\n" +
+	"\x17invisible_product_count\x18\x03 \x01(\x03R\x15invisibleProductCount\"\xde\x03\n" +
 	"\vCartProduct\x12\x11\n" +
 	"\x04K_id\x18\x01 \x01(\tR\x03KId\x12$\n" +
 	"\x0eK_display_name\x18\x02 \x01(\tR\fKDisplayName\x12#\n" +
