@@ -321,42 +321,6 @@ func (*EmptyReq) Descriptor() ([]byte, []int) {
 	return file_shop_shop_proto_rawDescGZIP(), []int{4}
 }
 
-type EmptyReq2 struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EmptyReq2) Reset() {
-	*x = EmptyReq2{}
-	mi := &file_shop_shop_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EmptyReq2) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EmptyReq2) ProtoMessage() {}
-
-func (x *EmptyReq2) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EmptyReq2.ProtoReflect.Descriptor instead.
-func (*EmptyReq2) Descriptor() ([]byte, []int) {
-	return file_shop_shop_proto_rawDescGZIP(), []int{5}
-}
-
 var File_shop_shop_proto protoreflect.FileDescriptor
 
 const file_shop_shop_proto_rawDesc = "" +
@@ -385,8 +349,7 @@ const file_shop_shop_proto_rawDesc = "" +
 	"\vadmin_count\x18\x03 \x01(\x03R\n" +
 	"adminCount\"\n" +
 	"\n" +
-	"\bEmptyReq\"\v\n" +
-	"\tEmptyReq22\x82\x01\n" +
+	"\bEmptyReq2\x82\x01\n" +
 	"\vShopService\x12&\n" +
 	"\aGetShop\x12\r.shop.ShopReq\x1a\n" +
 	".shop.Shop\"\x00\x12K\n" +
@@ -404,14 +367,13 @@ func file_shop_shop_proto_rawDescGZIP() []byte {
 	return file_shop_shop_proto_rawDescData
 }
 
-var file_shop_shop_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_shop_shop_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_shop_shop_proto_goTypes = []any{
 	(*ShopReq)(nil),                   // 0: shop.ShopReq
 	(*Shop)(nil),                      // 1: shop.Shop
 	(*StoreAdminAnalyticsResult)(nil), // 2: shop.StoreAdminAnalyticsResult
 	(*StoreAdminAnalytics)(nil),       // 3: shop.StoreAdminAnalytics
 	(*EmptyReq)(nil),                  // 4: shop.EmptyReq
-	(*EmptyReq2)(nil),                 // 5: shop.EmptyReq2
 }
 var file_shop_shop_proto_depIdxs = []int32{
 	3, // 0: shop.StoreAdminAnalyticsResult.data:type_name -> shop.StoreAdminAnalytics
@@ -437,7 +399,7 @@ func file_shop_shop_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shop_shop_proto_rawDesc), len(file_shop_shop_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
