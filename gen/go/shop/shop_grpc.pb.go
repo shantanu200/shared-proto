@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	ShopService_GetShop_FullMethodName                = "/shop.ShopService/GetShop"
 	ShopService_GetStoreAdminAnalytics_FullMethodName = "/shop.ShopService/GetStoreAdminAnalytics"
+	ShopService_GetStoreCountAnalytics_FullMethodName = "/shop.ShopService/GetStoreCountAnalytics"
 )
 
 // ShopServiceClient is the client API for ShopService service.
@@ -29,6 +30,7 @@ const (
 type ShopServiceClient interface {
 	GetShop(ctx context.Context, in *ShopReq, opts ...grpc.CallOption) (*Shop, error)
 	GetStoreAdminAnalytics(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*StoreAdminAnalyticsResult, error)
+	GetStoreCountAnalytics(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*StoreCountAnalytics, error)
 }
 
 type shopServiceClient struct {
@@ -59,12 +61,23 @@ func (c *shopServiceClient) GetStoreAdminAnalytics(ctx context.Context, in *Empt
 	return out, nil
 }
 
+func (c *shopServiceClient) GetStoreCountAnalytics(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*StoreCountAnalytics, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StoreCountAnalytics)
+	err := c.cc.Invoke(ctx, ShopService_GetStoreCountAnalytics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ShopServiceServer is the server API for ShopService service.
 // All implementations must embed UnimplementedShopServiceServer
 // for forward compatibility.
 type ShopServiceServer interface {
 	GetShop(context.Context, *ShopReq) (*Shop, error)
 	GetStoreAdminAnalytics(context.Context, *EmptyReq) (*StoreAdminAnalyticsResult, error)
+	GetStoreCountAnalytics(context.Context, *EmptyReq) (*StoreCountAnalytics, error)
 	mustEmbedUnimplementedShopServiceServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedShopServiceServer) GetShop(context.Context, *ShopReq) (*Shop,
 }
 func (UnimplementedShopServiceServer) GetStoreAdminAnalytics(context.Context, *EmptyReq) (*StoreAdminAnalyticsResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStoreAdminAnalytics not implemented")
+}
+func (UnimplementedShopServiceServer) GetStoreCountAnalytics(context.Context, *EmptyReq) (*StoreCountAnalytics, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStoreCountAnalytics not implemented")
 }
 func (UnimplementedShopServiceServer) mustEmbedUnimplementedShopServiceServer() {}
 func (UnimplementedShopServiceServer) testEmbeddedByValue()                     {}
@@ -138,6 +154,24 @@ func _ShopService_GetStoreAdminAnalytics_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ShopService_GetStoreCountAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShopServiceServer).GetStoreCountAnalytics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShopService_GetStoreCountAnalytics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShopServiceServer).GetStoreCountAnalytics(ctx, req.(*EmptyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ShopService_ServiceDesc is the grpc.ServiceDesc for ShopService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +186,10 @@ var ShopService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetStoreAdminAnalytics",
 			Handler:    _ShopService_GetStoreAdminAnalytics_Handler,
+		},
+		{
+			MethodName: "GetStoreCountAnalytics",
+			Handler:    _ShopService_GetStoreCountAnalytics_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
