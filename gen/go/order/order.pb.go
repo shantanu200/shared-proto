@@ -3308,6 +3308,310 @@ func (x *TopProductsResponse) GetData() []*StoreTopProducts {
 	return nil
 }
 
+type BestSellingProductItem struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ProductId      string                 `protobuf:"bytes,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	QuantitySold   int64                  `protobuf:"varint,2,opt,name=quantity_sold,json=quantitySold,proto3" json:"quantity_sold,omitempty"`
+	AvgPortionSize float64                `protobuf:"fixed64,3,opt,name=avg_portion_size,json=avgPortionSize,proto3" json:"avg_portion_size,omitempty"`
+	OrderCount     int64                  `protobuf:"varint,4,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *BestSellingProductItem) Reset() {
+	*x = BestSellingProductItem{}
+	mi := &file_order_order_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BestSellingProductItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BestSellingProductItem) ProtoMessage() {}
+
+func (x *BestSellingProductItem) ProtoReflect() protoreflect.Message {
+	mi := &file_order_order_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BestSellingProductItem.ProtoReflect.Descriptor instead.
+func (*BestSellingProductItem) Descriptor() ([]byte, []int) {
+	return file_order_order_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *BestSellingProductItem) GetProductId() string {
+	if x != nil {
+		return x.ProductId
+	}
+	return ""
+}
+
+func (x *BestSellingProductItem) GetQuantitySold() int64 {
+	if x != nil {
+		return x.QuantitySold
+	}
+	return 0
+}
+
+func (x *BestSellingProductItem) GetAvgPortionSize() float64 {
+	if x != nil {
+		return x.AvgPortionSize
+	}
+	return 0
+}
+
+func (x *BestSellingProductItem) GetOrderCount() int64 {
+	if x != nil {
+		return x.OrderCount
+	}
+	return 0
+}
+
+type BestSellingProductsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartDate     string                 `protobuf:"bytes,1,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"` // Format: YYYY-MM-DD
+	EndDate       string                 `protobuf:"bytes,2,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`       // Format: YYYY-MM-DD
+	StoreId       int64                  `protobuf:"varint,3,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`      // Optional: Filter by store
+	Page          int64                  `protobuf:"varint,4,opt,name=page,proto3" json:"page,omitempty"`                           // For pagination
+	Size          int64                  `protobuf:"varint,5,opt,name=size,proto3" json:"size,omitempty"`                           // Page size/limit
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BestSellingProductsRequest) Reset() {
+	*x = BestSellingProductsRequest{}
+	mi := &file_order_order_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BestSellingProductsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BestSellingProductsRequest) ProtoMessage() {}
+
+func (x *BestSellingProductsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_order_order_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BestSellingProductsRequest.ProtoReflect.Descriptor instead.
+func (*BestSellingProductsRequest) Descriptor() ([]byte, []int) {
+	return file_order_order_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *BestSellingProductsRequest) GetStartDate() string {
+	if x != nil {
+		return x.StartDate
+	}
+	return ""
+}
+
+func (x *BestSellingProductsRequest) GetEndDate() string {
+	if x != nil {
+		return x.EndDate
+	}
+	return ""
+}
+
+func (x *BestSellingProductsRequest) GetStoreId() int64 {
+	if x != nil {
+		return x.StoreId
+	}
+	return 0
+}
+
+func (x *BestSellingProductsRequest) GetPage() int64 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BestSellingProductsRequest) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+type Pagination struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Offset        int64                  `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
+	Limit         int64                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	PageTotal     int64                  `protobuf:"varint,3,opt,name=pageTotal,proto3" json:"pageTotal,omitempty"`
+	Total         int64                  `protobuf:"varint,4,opt,name=Total,proto3" json:"Total,omitempty"`
+	PageSize      int64                  `protobuf:"varint,5,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Pagination) Reset() {
+	*x = Pagination{}
+	mi := &file_order_order_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Pagination) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Pagination) ProtoMessage() {}
+
+func (x *Pagination) ProtoReflect() protoreflect.Message {
+	mi := &file_order_order_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Pagination.ProtoReflect.Descriptor instead.
+func (*Pagination) Descriptor() ([]byte, []int) {
+	return file_order_order_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *Pagination) GetOffset() int64 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+func (x *Pagination) GetLimit() int64 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *Pagination) GetPageTotal() int64 {
+	if x != nil {
+		return x.PageTotal
+	}
+	return 0
+}
+
+func (x *Pagination) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *Pagination) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type BestSellingProductsResponse struct {
+	state               protoimpl.MessageState    `protogen:"open.v1"`
+	Pagination          *Pagination               `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	Start               string                    `protobuf:"bytes,2,opt,name=start,proto3" json:"start,omitempty"`
+	End                 string                    `protobuf:"bytes,3,opt,name=end,proto3" json:"end,omitempty"`
+	ProductCount        int64                     `protobuf:"varint,4,opt,name=product_count,json=productCount,proto3" json:"product_count,omitempty"`
+	CompletedOrderCount int64                     `protobuf:"varint,5,opt,name=completed_order_count,json=completedOrderCount,proto3" json:"completed_order_count,omitempty"`
+	Data                []*BestSellingProductItem `protobuf:"bytes,6,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *BestSellingProductsResponse) Reset() {
+	*x = BestSellingProductsResponse{}
+	mi := &file_order_order_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BestSellingProductsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BestSellingProductsResponse) ProtoMessage() {}
+
+func (x *BestSellingProductsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_order_order_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BestSellingProductsResponse.ProtoReflect.Descriptor instead.
+func (*BestSellingProductsResponse) Descriptor() ([]byte, []int) {
+	return file_order_order_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *BestSellingProductsResponse) GetPagination() *Pagination {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+func (x *BestSellingProductsResponse) GetStart() string {
+	if x != nil {
+		return x.Start
+	}
+	return ""
+}
+
+func (x *BestSellingProductsResponse) GetEnd() string {
+	if x != nil {
+		return x.End
+	}
+	return ""
+}
+
+func (x *BestSellingProductsResponse) GetProductCount() int64 {
+	if x != nil {
+		return x.ProductCount
+	}
+	return 0
+}
+
+func (x *BestSellingProductsResponse) GetCompletedOrderCount() int64 {
+	if x != nil {
+		return x.CompletedOrderCount
+	}
+	return 0
+}
+
+func (x *BestSellingProductsResponse) GetData() []*BestSellingProductItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_order_order_proto protoreflect.FileDescriptor
 
 const file_order_order_proto_rawDesc = "" +
@@ -3575,7 +3879,37 @@ const file_order_order_proto_rawDesc = "" +
 	"\vstore_count\x18\x01 \x01(\x05R\n" +
 	"storeCount\x12<\n" +
 	"\x1btop_product_count_per_store\x18\x02 \x01(\x05R\x17topProductCountPerStore\x12+\n" +
-	"\x04data\x18\x03 \x03(\v2\x17.order.StoreTopProductsR\x04data2\xbf\x11\n" +
+	"\x04data\x18\x03 \x03(\v2\x17.order.StoreTopProductsR\x04data\"\xa7\x01\n" +
+	"\x16BestSellingProductItem\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\tR\tproductId\x12#\n" +
+	"\rquantity_sold\x18\x02 \x01(\x03R\fquantitySold\x12(\n" +
+	"\x10avg_portion_size\x18\x03 \x01(\x01R\x0eavgPortionSize\x12\x1f\n" +
+	"\vorder_count\x18\x04 \x01(\x03R\n" +
+	"orderCount\"\x99\x01\n" +
+	"\x1aBestSellingProductsRequest\x12\x1d\n" +
+	"\n" +
+	"start_date\x18\x01 \x01(\tR\tstartDate\x12\x19\n" +
+	"\bend_date\x18\x02 \x01(\tR\aendDate\x12\x19\n" +
+	"\bstore_id\x18\x03 \x01(\x03R\astoreId\x12\x12\n" +
+	"\x04page\x18\x04 \x01(\x03R\x04page\x12\x12\n" +
+	"\x04size\x18\x05 \x01(\x03R\x04size\"\x8a\x01\n" +
+	"\n" +
+	"Pagination\x12\x16\n" +
+	"\x06offset\x18\x01 \x01(\x03R\x06offset\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x03R\x05limit\x12\x1c\n" +
+	"\tpageTotal\x18\x03 \x01(\x03R\tpageTotal\x12\x14\n" +
+	"\x05Total\x18\x04 \x01(\x03R\x05Total\x12\x1a\n" +
+	"\bpageSize\x18\x05 \x01(\x03R\bpageSize\"\x84\x02\n" +
+	"\x1bBestSellingProductsResponse\x121\n" +
+	"\n" +
+	"pagination\x18\x01 \x01(\v2\x11.order.PaginationR\n" +
+	"pagination\x12\x14\n" +
+	"\x05start\x18\x02 \x01(\tR\x05start\x12\x10\n" +
+	"\x03end\x18\x03 \x01(\tR\x03end\x12#\n" +
+	"\rproduct_count\x18\x04 \x01(\x03R\fproductCount\x122\n" +
+	"\x15completed_order_count\x18\x05 \x01(\x03R\x13completedOrderCount\x121\n" +
+	"\x04data\x18\x06 \x03(\v2\x1d.order.BestSellingProductItemR\x04data2\xa2\x12\n" +
 	"\fOrderService\x12/\n" +
 	"\fGetOrderByID\x12\x0f.order.OrderReq\x1a\f.order.Order\"\x00\x12C\n" +
 	"\x14GetRefundTotalAmount\x12\x0f.order.EmptyReq\x1a\x18.order.RefundTotalAmount\"\x00\x125\n" +
@@ -3605,7 +3939,8 @@ const file_order_order_proto_rawDesc = "" +
 	"\x18GetCustomerLifetimeValue\x12\x0f.order.EmptyReq\x1a\x1c.order.CustomerLifetimeValue\"\x00\x12N\n" +
 	"\x14GetCustomerOrderData\x12\x17.order.DateRangeRequest\x1a\x1b.order.CustomerDataResponse\"\x00\x12M\n" +
 	"\x11GetStoreAnalytics\x12\x17.order.DateRangeRequest\x1a\x1d.order.StoreAnalyticsResponse\"\x00\x12N\n" +
-	"\x15GetTopProductsByStore\x12\x17.order.DateRangeRequest\x1a\x1a.order.TopProductsResponse\"\x00B2Z0github.com/shantanu200/shared-proto/gen/go/orderb\x06proto3"
+	"\x15GetTopProductsByStore\x12\x17.order.DateRangeRequest\x1a\x1a.order.TopProductsResponse\"\x00\x12a\n" +
+	"\x16GetBestSellingProducts\x12!.order.BestSellingProductsRequest\x1a\".order.BestSellingProductsResponse\"\x00B2Z0github.com/shantanu200/shared-proto/gen/go/orderb\x06proto3"
 
 var (
 	file_order_order_proto_rawDescOnce sync.Once
@@ -3619,7 +3954,7 @@ func file_order_order_proto_rawDescGZIP() []byte {
 	return file_order_order_proto_rawDescData
 }
 
-var file_order_order_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
+var file_order_order_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
 var file_order_order_proto_goTypes = []any{
 	(*Order)(nil),                              // 0: order.Order
 	(*Product)(nil),                            // 1: order.Product
@@ -3673,6 +4008,10 @@ var file_order_order_proto_goTypes = []any{
 	(*ProductMetrics)(nil),                     // 49: order.ProductMetrics
 	(*StoreTopProducts)(nil),                   // 50: order.StoreTopProducts
 	(*TopProductsResponse)(nil),                // 51: order.TopProductsResponse
+	(*BestSellingProductItem)(nil),             // 52: order.BestSellingProductItem
+	(*BestSellingProductsRequest)(nil),         // 53: order.BestSellingProductsRequest
+	(*Pagination)(nil),                         // 54: order.Pagination
+	(*BestSellingProductsResponse)(nil),        // 55: order.BestSellingProductsResponse
 }
 var file_order_order_proto_depIdxs = []int32{
 	1,  // 0: order.Order.products:type_name -> order.Product
@@ -3694,69 +4033,73 @@ var file_order_order_proto_depIdxs = []int32{
 	47, // 16: order.StoreAnalyticsResponse.data:type_name -> order.StoreAnalytics
 	49, // 17: order.StoreTopProducts.products:type_name -> order.ProductMetrics
 	50, // 18: order.TopProductsResponse.data:type_name -> order.StoreTopProducts
-	2,  // 19: order.OrderService.GetOrderByID:input_type -> order.OrderReq
-	41, // 20: order.OrderService.GetRefundTotalAmount:input_type -> order.EmptyReq
-	41, // 21: order.OrderService.GetRefundRate:input_type -> order.EmptyReq
-	41, // 22: order.OrderService.GetRefundSuccessRate:input_type -> order.EmptyReq
-	41, // 23: order.OrderService.GetAvgRefundProcessingTime:input_type -> order.EmptyReq
-	41, // 24: order.OrderService.GetRefundsByProduct:input_type -> order.EmptyReq
-	41, // 25: order.OrderService.GetRefundStores:input_type -> order.EmptyReq
-	11, // 26: order.OrderService.GetTotalRevenue:input_type -> order.DateRangeRequest
-	11, // 27: order.OrderService.GetStoreRevenue:input_type -> order.DateRangeRequest
-	11, // 28: order.OrderService.GetCompletedOrderCount:input_type -> order.DateRangeRequest
-	11, // 29: order.OrderService.GetOrderTypeRevenue:input_type -> order.DateRangeRequest
-	11, // 30: order.OrderService.GetTaxBreakdown:input_type -> order.DateRangeRequest
-	11, // 31: order.OrderService.GetAverageOrderValue:input_type -> order.DateRangeRequest
-	12, // 32: order.OrderService.GetSalesTrend:input_type -> order.SalesTrendRequest
-	41, // 33: order.OrderService.GetDiscountTotalAmount:input_type -> order.EmptyReq
-	11, // 34: order.OrderService.GetOrderStatusDistribution:input_type -> order.DateRangeRequest
-	11, // 35: order.OrderService.GetAverageDeliveryTime:input_type -> order.DateRangeRequest
-	11, // 36: order.OrderService.GetCartRate:input_type -> order.DateRangeRequest
-	11, // 37: order.OrderService.GetOrdersPerStore:input_type -> order.DateRangeRequest
-	11, // 38: order.OrderService.GetAverageItemsPerOrder:input_type -> order.DateRangeRequest
-	11, // 39: order.OrderService.GetPaymentStatusDistribution:input_type -> order.DateRangeRequest
-	11, // 40: order.OrderService.GetDeliveryStatusDistribution:input_type -> order.DateRangeRequest
-	11, // 41: order.OrderService.GetOrdersByRegion:input_type -> order.DateRangeRequest
-	11, // 42: order.OrderService.GetPeakOrderTimes:input_type -> order.DateRangeRequest
-	41, // 43: order.OrderService.GetRepeatCustomerRate:input_type -> order.EmptyReq
-	41, // 44: order.OrderService.GetCustomerLifetimeValue:input_type -> order.EmptyReq
-	11, // 45: order.OrderService.GetCustomerOrderData:input_type -> order.DateRangeRequest
-	11, // 46: order.OrderService.GetStoreAnalytics:input_type -> order.DateRangeRequest
-	11, // 47: order.OrderService.GetTopProductsByStore:input_type -> order.DateRangeRequest
-	0,  // 48: order.OrderService.GetOrderByID:output_type -> order.Order
-	3,  // 49: order.OrderService.GetRefundTotalAmount:output_type -> order.RefundTotalAmount
-	4,  // 50: order.OrderService.GetRefundRate:output_type -> order.RefundRate
-	5,  // 51: order.OrderService.GetRefundSuccessRate:output_type -> order.RefundSuccessRate
-	6,  // 52: order.OrderService.GetAvgRefundProcessingTime:output_type -> order.AvgRefundProcessingTime
-	8,  // 53: order.OrderService.GetRefundsByProduct:output_type -> order.RefundsByProduct
-	10, // 54: order.OrderService.GetRefundStores:output_type -> order.RefundStores
-	13, // 55: order.OrderService.GetTotalRevenue:output_type -> order.TotalRevenueResponse
-	14, // 56: order.OrderService.GetStoreRevenue:output_type -> order.StoreRevenueResponse
-	16, // 57: order.OrderService.GetCompletedOrderCount:output_type -> order.CompletedOrderCountResponse
-	17, // 58: order.OrderService.GetOrderTypeRevenue:output_type -> order.OrderTypeRevenueResponse
-	19, // 59: order.OrderService.GetTaxBreakdown:output_type -> order.TaxBreakdownResponse
-	21, // 60: order.OrderService.GetAverageOrderValue:output_type -> order.AverageOrderValueResponse
-	22, // 61: order.OrderService.GetSalesTrend:output_type -> order.SalesTrendResponse
-	24, // 62: order.OrderService.GetDiscountTotalAmount:output_type -> order.DiscountAmount
-	26, // 63: order.OrderService.GetOrderStatusDistribution:output_type -> order.OrderStatusDistributionResponse
-	28, // 64: order.OrderService.GetAverageDeliveryTime:output_type -> order.AverageDeliveryTimeResponse
-	29, // 65: order.OrderService.GetCartRate:output_type -> order.CartRateResponse
-	31, // 66: order.OrderService.GetOrdersPerStore:output_type -> order.OrdersPerStoreResponse
-	32, // 67: order.OrderService.GetAverageItemsPerOrder:output_type -> order.AverageItemsPerOrderResponse
-	34, // 68: order.OrderService.GetPaymentStatusDistribution:output_type -> order.PaymentStatusDistributionResponse
-	36, // 69: order.OrderService.GetDeliveryStatusDistribution:output_type -> order.DeliveryStatusDistributionResponse
-	38, // 70: order.OrderService.GetOrdersByRegion:output_type -> order.OrdersByRegionResponse
-	40, // 71: order.OrderService.GetPeakOrderTimes:output_type -> order.PeakOrderTimesResponse
-	42, // 72: order.OrderService.GetRepeatCustomerRate:output_type -> order.RepeatCustomerRate
-	43, // 73: order.OrderService.GetCustomerLifetimeValue:output_type -> order.CustomerLifetimeValue
-	46, // 74: order.OrderService.GetCustomerOrderData:output_type -> order.CustomerDataResponse
-	48, // 75: order.OrderService.GetStoreAnalytics:output_type -> order.StoreAnalyticsResponse
-	51, // 76: order.OrderService.GetTopProductsByStore:output_type -> order.TopProductsResponse
-	48, // [48:77] is the sub-list for method output_type
-	19, // [19:48] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	54, // 19: order.BestSellingProductsResponse.pagination:type_name -> order.Pagination
+	52, // 20: order.BestSellingProductsResponse.data:type_name -> order.BestSellingProductItem
+	2,  // 21: order.OrderService.GetOrderByID:input_type -> order.OrderReq
+	41, // 22: order.OrderService.GetRefundTotalAmount:input_type -> order.EmptyReq
+	41, // 23: order.OrderService.GetRefundRate:input_type -> order.EmptyReq
+	41, // 24: order.OrderService.GetRefundSuccessRate:input_type -> order.EmptyReq
+	41, // 25: order.OrderService.GetAvgRefundProcessingTime:input_type -> order.EmptyReq
+	41, // 26: order.OrderService.GetRefundsByProduct:input_type -> order.EmptyReq
+	41, // 27: order.OrderService.GetRefundStores:input_type -> order.EmptyReq
+	11, // 28: order.OrderService.GetTotalRevenue:input_type -> order.DateRangeRequest
+	11, // 29: order.OrderService.GetStoreRevenue:input_type -> order.DateRangeRequest
+	11, // 30: order.OrderService.GetCompletedOrderCount:input_type -> order.DateRangeRequest
+	11, // 31: order.OrderService.GetOrderTypeRevenue:input_type -> order.DateRangeRequest
+	11, // 32: order.OrderService.GetTaxBreakdown:input_type -> order.DateRangeRequest
+	11, // 33: order.OrderService.GetAverageOrderValue:input_type -> order.DateRangeRequest
+	12, // 34: order.OrderService.GetSalesTrend:input_type -> order.SalesTrendRequest
+	41, // 35: order.OrderService.GetDiscountTotalAmount:input_type -> order.EmptyReq
+	11, // 36: order.OrderService.GetOrderStatusDistribution:input_type -> order.DateRangeRequest
+	11, // 37: order.OrderService.GetAverageDeliveryTime:input_type -> order.DateRangeRequest
+	11, // 38: order.OrderService.GetCartRate:input_type -> order.DateRangeRequest
+	11, // 39: order.OrderService.GetOrdersPerStore:input_type -> order.DateRangeRequest
+	11, // 40: order.OrderService.GetAverageItemsPerOrder:input_type -> order.DateRangeRequest
+	11, // 41: order.OrderService.GetPaymentStatusDistribution:input_type -> order.DateRangeRequest
+	11, // 42: order.OrderService.GetDeliveryStatusDistribution:input_type -> order.DateRangeRequest
+	11, // 43: order.OrderService.GetOrdersByRegion:input_type -> order.DateRangeRequest
+	11, // 44: order.OrderService.GetPeakOrderTimes:input_type -> order.DateRangeRequest
+	41, // 45: order.OrderService.GetRepeatCustomerRate:input_type -> order.EmptyReq
+	41, // 46: order.OrderService.GetCustomerLifetimeValue:input_type -> order.EmptyReq
+	11, // 47: order.OrderService.GetCustomerOrderData:input_type -> order.DateRangeRequest
+	11, // 48: order.OrderService.GetStoreAnalytics:input_type -> order.DateRangeRequest
+	11, // 49: order.OrderService.GetTopProductsByStore:input_type -> order.DateRangeRequest
+	53, // 50: order.OrderService.GetBestSellingProducts:input_type -> order.BestSellingProductsRequest
+	0,  // 51: order.OrderService.GetOrderByID:output_type -> order.Order
+	3,  // 52: order.OrderService.GetRefundTotalAmount:output_type -> order.RefundTotalAmount
+	4,  // 53: order.OrderService.GetRefundRate:output_type -> order.RefundRate
+	5,  // 54: order.OrderService.GetRefundSuccessRate:output_type -> order.RefundSuccessRate
+	6,  // 55: order.OrderService.GetAvgRefundProcessingTime:output_type -> order.AvgRefundProcessingTime
+	8,  // 56: order.OrderService.GetRefundsByProduct:output_type -> order.RefundsByProduct
+	10, // 57: order.OrderService.GetRefundStores:output_type -> order.RefundStores
+	13, // 58: order.OrderService.GetTotalRevenue:output_type -> order.TotalRevenueResponse
+	14, // 59: order.OrderService.GetStoreRevenue:output_type -> order.StoreRevenueResponse
+	16, // 60: order.OrderService.GetCompletedOrderCount:output_type -> order.CompletedOrderCountResponse
+	17, // 61: order.OrderService.GetOrderTypeRevenue:output_type -> order.OrderTypeRevenueResponse
+	19, // 62: order.OrderService.GetTaxBreakdown:output_type -> order.TaxBreakdownResponse
+	21, // 63: order.OrderService.GetAverageOrderValue:output_type -> order.AverageOrderValueResponse
+	22, // 64: order.OrderService.GetSalesTrend:output_type -> order.SalesTrendResponse
+	24, // 65: order.OrderService.GetDiscountTotalAmount:output_type -> order.DiscountAmount
+	26, // 66: order.OrderService.GetOrderStatusDistribution:output_type -> order.OrderStatusDistributionResponse
+	28, // 67: order.OrderService.GetAverageDeliveryTime:output_type -> order.AverageDeliveryTimeResponse
+	29, // 68: order.OrderService.GetCartRate:output_type -> order.CartRateResponse
+	31, // 69: order.OrderService.GetOrdersPerStore:output_type -> order.OrdersPerStoreResponse
+	32, // 70: order.OrderService.GetAverageItemsPerOrder:output_type -> order.AverageItemsPerOrderResponse
+	34, // 71: order.OrderService.GetPaymentStatusDistribution:output_type -> order.PaymentStatusDistributionResponse
+	36, // 72: order.OrderService.GetDeliveryStatusDistribution:output_type -> order.DeliveryStatusDistributionResponse
+	38, // 73: order.OrderService.GetOrdersByRegion:output_type -> order.OrdersByRegionResponse
+	40, // 74: order.OrderService.GetPeakOrderTimes:output_type -> order.PeakOrderTimesResponse
+	42, // 75: order.OrderService.GetRepeatCustomerRate:output_type -> order.RepeatCustomerRate
+	43, // 76: order.OrderService.GetCustomerLifetimeValue:output_type -> order.CustomerLifetimeValue
+	46, // 77: order.OrderService.GetCustomerOrderData:output_type -> order.CustomerDataResponse
+	48, // 78: order.OrderService.GetStoreAnalytics:output_type -> order.StoreAnalyticsResponse
+	51, // 79: order.OrderService.GetTopProductsByStore:output_type -> order.TopProductsResponse
+	55, // 80: order.OrderService.GetBestSellingProducts:output_type -> order.BestSellingProductsResponse
+	51, // [51:81] is the sub-list for method output_type
+	21, // [21:51] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_order_order_proto_init() }
@@ -3770,7 +4113,7 @@ func file_order_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_order_order_proto_rawDesc), len(file_order_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   52,
+			NumMessages:   56,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
