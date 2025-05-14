@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProductService_GetProducts_FullMethodName     = "/product.ProductService/GetProducts"
-	ProductService_GetCartProducts_FullMethodName = "/product.ProductService/GetCartProducts"
-	ProductService_GetCartProduct_FullMethodName  = "/product.ProductService/GetCartProduct"
-	ProductService_GetProductsMap_FullMethodName  = "/product.ProductService/GetProductsMap"
+	ProductService_GetProducts_FullMethodName              = "/product.ProductService/GetProducts"
+	ProductService_GetCartProducts_FullMethodName          = "/product.ProductService/GetCartProducts"
+	ProductService_GetCartProduct_FullMethodName           = "/product.ProductService/GetCartProduct"
+	ProductService_GetProductsMap_FullMethodName           = "/product.ProductService/GetProductsMap"
+	ProductService_GetProductCountAnalytics_FullMethodName = "/product.ProductService/GetProductCountAnalytics"
 )
 
 // ProductServiceClient is the client API for ProductService service.
@@ -33,6 +34,7 @@ type ProductServiceClient interface {
 	GetCartProducts(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*GetCartProductResponse, error)
 	GetCartProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*CartProduct, error)
 	GetProductsMap(ctx context.Context, in *GetProductsRequest, opts ...grpc.CallOption) (*ProductsMap, error)
+	GetProductCountAnalytics(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*ProductCountAnalytics, error)
 }
 
 type productServiceClient struct {
@@ -83,6 +85,16 @@ func (c *productServiceClient) GetProductsMap(ctx context.Context, in *GetProduc
 	return out, nil
 }
 
+func (c *productServiceClient) GetProductCountAnalytics(ctx context.Context, in *EmptyReq, opts ...grpc.CallOption) (*ProductCountAnalytics, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ProductCountAnalytics)
+	err := c.cc.Invoke(ctx, ProductService_GetProductCountAnalytics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductServiceServer is the server API for ProductService service.
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility.
@@ -91,6 +103,7 @@ type ProductServiceServer interface {
 	GetCartProducts(context.Context, *GetProductsRequest) (*GetCartProductResponse, error)
 	GetCartProduct(context.Context, *GetProductRequest) (*CartProduct, error)
 	GetProductsMap(context.Context, *GetProductsRequest) (*ProductsMap, error)
+	GetProductCountAnalytics(context.Context, *EmptyReq) (*ProductCountAnalytics, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -112,6 +125,9 @@ func (UnimplementedProductServiceServer) GetCartProduct(context.Context, *GetPro
 }
 func (UnimplementedProductServiceServer) GetProductsMap(context.Context, *GetProductsRequest) (*ProductsMap, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProductsMap not implemented")
+}
+func (UnimplementedProductServiceServer) GetProductCountAnalytics(context.Context, *EmptyReq) (*ProductCountAnalytics, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProductCountAnalytics not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 func (UnimplementedProductServiceServer) testEmbeddedByValue()                        {}
@@ -206,6 +222,24 @@ func _ProductService_GetProductsMap_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductService_GetProductCountAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).GetProductCountAnalytics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_GetProductCountAnalytics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).GetProductCountAnalytics(ctx, req.(*EmptyReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +262,10 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProductsMap",
 			Handler:    _ProductService_GetProductsMap_Handler,
+		},
+		{
+			MethodName: "GetProductCountAnalytics",
+			Handler:    _ProductService_GetProductCountAnalytics_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
