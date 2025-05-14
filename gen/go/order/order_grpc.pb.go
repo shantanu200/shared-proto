@@ -84,7 +84,7 @@ type OrderServiceClient interface {
 	GetCustomerOrderData(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*CustomerDataResponse, error)
 	GetStoreAnalytics(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*StoreAnalyticsResponse, error)
 	GetTopProductsByStore(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*TopProductsResponse, error)
-	GetBestSellingProducts(ctx context.Context, in *BestSellingProductsRequest, opts ...grpc.CallOption) (*BestSellingProductsResponse, error)
+	GetBestSellingProducts(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*BestSellingProductsResponse, error)
 }
 
 type orderServiceClient struct {
@@ -385,7 +385,7 @@ func (c *orderServiceClient) GetTopProductsByStore(ctx context.Context, in *Date
 	return out, nil
 }
 
-func (c *orderServiceClient) GetBestSellingProducts(ctx context.Context, in *BestSellingProductsRequest, opts ...grpc.CallOption) (*BestSellingProductsResponse, error) {
+func (c *orderServiceClient) GetBestSellingProducts(ctx context.Context, in *DateRangeRequest, opts ...grpc.CallOption) (*BestSellingProductsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BestSellingProductsResponse)
 	err := c.cc.Invoke(ctx, OrderService_GetBestSellingProducts_FullMethodName, in, out, cOpts...)
@@ -428,7 +428,7 @@ type OrderServiceServer interface {
 	GetCustomerOrderData(context.Context, *DateRangeRequest) (*CustomerDataResponse, error)
 	GetStoreAnalytics(context.Context, *DateRangeRequest) (*StoreAnalyticsResponse, error)
 	GetTopProductsByStore(context.Context, *DateRangeRequest) (*TopProductsResponse, error)
-	GetBestSellingProducts(context.Context, *BestSellingProductsRequest) (*BestSellingProductsResponse, error)
+	GetBestSellingProducts(context.Context, *DateRangeRequest) (*BestSellingProductsResponse, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -526,7 +526,7 @@ func (UnimplementedOrderServiceServer) GetStoreAnalytics(context.Context, *DateR
 func (UnimplementedOrderServiceServer) GetTopProductsByStore(context.Context, *DateRangeRequest) (*TopProductsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTopProductsByStore not implemented")
 }
-func (UnimplementedOrderServiceServer) GetBestSellingProducts(context.Context, *BestSellingProductsRequest) (*BestSellingProductsResponse, error) {
+func (UnimplementedOrderServiceServer) GetBestSellingProducts(context.Context, *DateRangeRequest) (*BestSellingProductsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBestSellingProducts not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
@@ -1073,7 +1073,7 @@ func _OrderService_GetTopProductsByStore_Handler(srv interface{}, ctx context.Co
 }
 
 func _OrderService_GetBestSellingProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BestSellingProductsRequest)
+	in := new(DateRangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1085,7 +1085,7 @@ func _OrderService_GetBestSellingProducts_Handler(srv interface{}, ctx context.C
 		FullMethod: OrderService_GetBestSellingProducts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderServiceServer).GetBestSellingProducts(ctx, req.(*BestSellingProductsRequest))
+		return srv.(OrderServiceServer).GetBestSellingProducts(ctx, req.(*DateRangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
