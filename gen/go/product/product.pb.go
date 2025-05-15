@@ -59,13 +59,13 @@ func (*EmptyReq) Descriptor() ([]byte, []int) {
 }
 
 type StoreInventoryItem struct {
-	state                    protoimpl.MessageState `protogen:"open.v1"`
-	StoreId                  int64                  `protobuf:"varint,1,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	ProductCount             int64                  `protobuf:"varint,2,opt,name=product_count,json=productCount,proto3" json:"product_count,omitempty"`
-	ProductCountInStockCount int64                  `protobuf:"varint,3,opt,name=product_count_in_stock_count,json=productCountInStockCount,proto3" json:"product_count_in_stock_count,omitempty"`
-	ProductOutOfStockCount   int64                  `protobuf:"varint,4,opt,name=product_out_of_stock_count,json=productOutOfStockCount,proto3" json:"product_out_of_stock_count,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	StoreId                int64                  `protobuf:"varint,1,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	ProductCount           int64                  `protobuf:"varint,2,opt,name=product_count,json=productCount,proto3" json:"product_count,omitempty"`
+	ProductInStockCount    int64                  `protobuf:"varint,3,opt,name=product_in_stock_count,json=productInStockCount,proto3" json:"product_in_stock_count,omitempty"`
+	ProductOutOfStockCount int64                  `protobuf:"varint,4,opt,name=product_out_of_stock_count,json=productOutOfStockCount,proto3" json:"product_out_of_stock_count,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *StoreInventoryItem) Reset() {
@@ -112,9 +112,9 @@ func (x *StoreInventoryItem) GetProductCount() int64 {
 	return 0
 }
 
-func (x *StoreInventoryItem) GetProductCountInStockCount() int64 {
+func (x *StoreInventoryItem) GetProductInStockCount() int64 {
 	if x != nil {
-		return x.ProductCountInStockCount
+		return x.ProductInStockCount
 	}
 	return 0
 }
@@ -760,11 +760,11 @@ const file_product_product_proto_rawDesc = "" +
 	"\n" +
 	"\x15product/product.proto\x12\aproduct\x1a\x1fgoogle/protobuf/timestamp.proto\"\n" +
 	"\n" +
-	"\bEmptyReq\"\xd0\x01\n" +
+	"\bEmptyReq\"\xc5\x01\n" +
 	"\x12StoreInventoryItem\x12\x19\n" +
 	"\bstore_id\x18\x01 \x01(\x03R\astoreId\x12#\n" +
-	"\rproduct_count\x18\x02 \x01(\x03R\fproductCount\x12>\n" +
-	"\x1cproduct_count_in_stock_count\x18\x03 \x01(\x03R\x18productCountInStockCount\x12:\n" +
+	"\rproduct_count\x18\x02 \x01(\x03R\fproductCount\x123\n" +
+	"\x16product_in_stock_count\x18\x03 \x01(\x03R\x13productInStockCount\x12:\n" +
 	"\x1aproduct_out_of_stock_count\x18\x04 \x01(\x03R\x16productOutOfStockCount\"k\n" +
 	"\x17StoreInventoryAnalytics\x12\x1f\n" +
 	"\vstore_count\x18\x01 \x01(\x03R\n" +
