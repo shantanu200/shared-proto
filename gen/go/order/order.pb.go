@@ -1735,12 +1735,13 @@ func (x *OrderStatusDistributionResponse) GetData() []*OrderStatusItem {
 }
 
 type DeliveryTimeItem struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	DeliveryPartner string                 `protobuf:"bytes,1,opt,name=delivery_partner,json=deliveryPartner,proto3" json:"delivery_partner,omitempty"`
-	OrderCount      int64                  `protobuf:"varint,2,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
-	AvgDeliveryTime float64                `protobuf:"fixed64,3,opt,name=avg_delivery_time,json=avgDeliveryTime,proto3" json:"avg_delivery_time,omitempty"` // in seconds
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	DeliveryPartner     string                 `protobuf:"bytes,1,opt,name=delivery_partner,json=deliveryPartner,proto3" json:"delivery_partner,omitempty"`
+	OrderCount          int64                  `protobuf:"varint,2,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
+	AvgDeliveryTime     float64                `protobuf:"fixed64,3,opt,name=avg_delivery_time,json=avgDeliveryTime,proto3" json:"avg_delivery_time,omitempty"` // in seconds
+	TotalDeliveryAmount float64                `protobuf:"fixed64,4,opt,name=total_delivery_amount,json=totalDeliveryAmount,proto3" json:"total_delivery_amount,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *DeliveryTimeItem) Reset() {
@@ -1790,6 +1791,13 @@ func (x *DeliveryTimeItem) GetOrderCount() int64 {
 func (x *DeliveryTimeItem) GetAvgDeliveryTime() float64 {
 	if x != nil {
 		return x.AvgDeliveryTime
+	}
+	return 0
+}
+
+func (x *DeliveryTimeItem) GetTotalDeliveryAmount() float64 {
+	if x != nil {
+		return x.TotalDeliveryAmount
 	}
 	return 0
 }
@@ -3685,12 +3693,13 @@ const file_order_order_proto_rawDesc = "" +
 	"\x05start\x18\x01 \x01(\tR\x05start\x12\x10\n" +
 	"\x03end\x18\x02 \x01(\tR\x03end\x12*\n" +
 	"\x11total_order_count\x18\x03 \x01(\x03R\x0ftotalOrderCount\x12*\n" +
-	"\x04data\x18\x04 \x03(\v2\x16.order.OrderStatusItemR\x04data\"\x8a\x01\n" +
+	"\x04data\x18\x04 \x03(\v2\x16.order.OrderStatusItemR\x04data\"\xbe\x01\n" +
 	"\x10DeliveryTimeItem\x12)\n" +
 	"\x10delivery_partner\x18\x01 \x01(\tR\x0fdeliveryPartner\x12\x1f\n" +
 	"\vorder_count\x18\x02 \x01(\x03R\n" +
 	"orderCount\x12*\n" +
-	"\x11avg_delivery_time\x18\x03 \x01(\x01R\x0favgDeliveryTime\"\xa6\x01\n" +
+	"\x11avg_delivery_time\x18\x03 \x01(\x01R\x0favgDeliveryTime\x122\n" +
+	"\x15total_delivery_amount\x18\x04 \x01(\x01R\x13totalDeliveryAmount\"\xa6\x01\n" +
 	"\x1bAverageDeliveryTimeResponse\x12\x14\n" +
 	"\x05start\x18\x01 \x01(\tR\x05start\x12\x10\n" +
 	"\x03end\x18\x02 \x01(\tR\x03end\x122\n" +
