@@ -64,6 +64,7 @@ type StoreInventoryItem struct {
 	ProductCount           int64                  `protobuf:"varint,2,opt,name=product_count,json=productCount,proto3" json:"product_count,omitempty"`
 	ProductInStockCount    int64                  `protobuf:"varint,3,opt,name=product_in_stock_count,json=productInStockCount,proto3" json:"product_in_stock_count,omitempty"`
 	ProductOutOfStockCount int64                  `protobuf:"varint,4,opt,name=product_out_of_stock_count,json=productOutOfStockCount,proto3" json:"product_out_of_stock_count,omitempty"`
+	InventoryCost          float64                `protobuf:"fixed64,5,opt,name=inventory_cost,json=inventoryCost,proto3" json:"inventory_cost,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -122,6 +123,13 @@ func (x *StoreInventoryItem) GetProductInStockCount() int64 {
 func (x *StoreInventoryItem) GetProductOutOfStockCount() int64 {
 	if x != nil {
 		return x.ProductOutOfStockCount
+	}
+	return 0
+}
+
+func (x *StoreInventoryItem) GetInventoryCost() float64 {
+	if x != nil {
+		return x.InventoryCost
 	}
 	return 0
 }
@@ -760,12 +768,13 @@ const file_product_product_proto_rawDesc = "" +
 	"\n" +
 	"\x15product/product.proto\x12\aproduct\x1a\x1fgoogle/protobuf/timestamp.proto\"\n" +
 	"\n" +
-	"\bEmptyReq\"\xc5\x01\n" +
+	"\bEmptyReq\"\xec\x01\n" +
 	"\x12StoreInventoryItem\x12\x19\n" +
 	"\bstore_id\x18\x01 \x01(\x03R\astoreId\x12#\n" +
 	"\rproduct_count\x18\x02 \x01(\x03R\fproductCount\x123\n" +
 	"\x16product_in_stock_count\x18\x03 \x01(\x03R\x13productInStockCount\x12:\n" +
-	"\x1aproduct_out_of_stock_count\x18\x04 \x01(\x03R\x16productOutOfStockCount\"k\n" +
+	"\x1aproduct_out_of_stock_count\x18\x04 \x01(\x03R\x16productOutOfStockCount\x12%\n" +
+	"\x0einventory_cost\x18\x05 \x01(\x01R\rinventoryCost\"k\n" +
 	"\x17StoreInventoryAnalytics\x12\x1f\n" +
 	"\vstore_count\x18\x01 \x01(\x03R\n" +
 	"storeCount\x12/\n" +
