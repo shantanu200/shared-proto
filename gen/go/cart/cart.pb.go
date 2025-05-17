@@ -29,6 +29,7 @@ type OrderProduct struct {
 	Portion       int64                  `protobuf:"varint,3,opt,name=portion,proto3" json:"portion,omitempty"`
 	Price         float64                `protobuf:"fixed64,4,opt,name=price,proto3" json:"price,omitempty"`
 	GstPer        float64                `protobuf:"fixed64,5,opt,name=gst_per,json=gstPer,proto3" json:"gst_per,omitempty"`
+	RwProductId   int64                  `protobuf:"varint,6,opt,name=rw_product_id,json=rwProductId,proto3" json:"rw_product_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -94,6 +95,13 @@ func (x *OrderProduct) GetPrice() float64 {
 func (x *OrderProduct) GetGstPer() float64 {
 	if x != nil {
 		return x.GstPer
+	}
+	return 0
+}
+
+func (x *OrderProduct) GetRwProductId() int64 {
+	if x != nil {
+		return x.RwProductId
 	}
 	return 0
 }
@@ -502,14 +510,15 @@ var File_cart_cart_proto protoreflect.FileDescriptor
 
 const file_cart_cart_proto_rawDesc = "" +
 	"\n" +
-	"\x0fcart/cart.proto\x12\x04cart\x1a\x1fgoogle/protobuf/timestamp.proto\"\x92\x01\n" +
+	"\x0fcart/cart.proto\x12\x04cart\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb6\x01\n" +
 	"\fOrderProduct\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\tR\tproductId\x12\x1a\n" +
 	"\bquantity\x18\x02 \x01(\x03R\bquantity\x12\x18\n" +
 	"\aportion\x18\x03 \x01(\x03R\aportion\x12\x14\n" +
 	"\x05price\x18\x04 \x01(\x01R\x05price\x12\x17\n" +
-	"\agst_per\x18\x05 \x01(\x01R\x06gstPer\"\xdc\x03\n" +
+	"\agst_per\x18\x05 \x01(\x01R\x06gstPer\x12\"\n" +
+	"\rrw_product_id\x18\x06 \x01(\x03R\vrwProductId\"\xdc\x03\n" +
 	"\tOrderCart\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1d\n" +
