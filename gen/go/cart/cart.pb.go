@@ -30,7 +30,7 @@ type OrderProduct struct {
 	Price         float64                `protobuf:"fixed64,4,opt,name=price,proto3" json:"price,omitempty"`
 	GstPer        float64                `protobuf:"fixed64,5,opt,name=gst_per,json=gstPer,proto3" json:"gst_per,omitempty"`
 	RwProductId   int64                  `protobuf:"varint,6,opt,name=rw_product_id,json=rwProductId,proto3" json:"rw_product_id,omitempty"`
-	PricePerKg    float64                `protobuf:"fixed64,7,opt,name=price_per_kg,json=pricePerKg,proto3" json:"price_per_kg,omitempty"`
+	PricePerKg    int64                  `protobuf:"varint,7,opt,name=price_per_kg,json=pricePerKg,proto3" json:"price_per_kg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -107,7 +107,7 @@ func (x *OrderProduct) GetRwProductId() int64 {
 	return 0
 }
 
-func (x *OrderProduct) GetPricePerKg() float64 {
+func (x *OrderProduct) GetPricePerKg() int64 {
 	if x != nil {
 		return x.PricePerKg
 	}
@@ -527,7 +527,7 @@ const file_cart_cart_proto_rawDesc = "" +
 	"\x05price\x18\x04 \x01(\x01R\x05price\x12\x17\n" +
 	"\agst_per\x18\x05 \x01(\x01R\x06gstPer\x12\"\n" +
 	"\rrw_product_id\x18\x06 \x01(\x03R\vrwProductId\x12 \n" +
-	"\fprice_per_kg\x18\a \x01(\x01R\n" +
+	"\fprice_per_kg\x18\a \x01(\x03R\n" +
 	"pricePerKg\"\xdc\x03\n" +
 	"\tOrderCart\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
